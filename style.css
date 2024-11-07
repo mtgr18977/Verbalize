@@ -1,0 +1,249 @@
+/* Importando fontes do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+/* Estilos gerais */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* Contêiner principal */
+#main-container {
+    display: flex;
+    height: calc(100vh - 50px); /* Desconta a altura do painel de estatísticas */
+    padding: 10px; /* Adicionado padding para criar espaço interno */
+    box-sizing: border-box;
+}
+
+/* Estilos para o editor */
+#editor-container {
+    width: 50%;
+    border-right: 1px solid #e0e0e0;
+    overflow: hidden;
+    background-color: #ffffff;
+    margin-right: 10px; /* Espaçamento à direita */
+    border: 1px solid #ddd; /* Adicionada borda */
+    box-sizing: border-box;
+}
+
+#editor {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    overflow: auto;
+    background-color: #ffffff;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Estilos para o visualizador e barra lateral */
+#viewer-container {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    border: 1px solid #ddd; /* Adicionada borda */
+    box-sizing: border-box;
+}
+
+#mdview {
+    width: 70%;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #fafafa;
+    box-sizing: border-box;
+    border-right: 1px solid #e0e0e0; /* Separação entre visualizador e barra lateral */
+}
+
+#sidebar {
+    width: 30%;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #ffffff;
+    box-sizing: border-box;
+}
+
+#sidebar h3 {
+    margin-top: 0;
+    font-weight: 500;
+    color: #555;
+}
+
+/* Estilos para o conteúdo do mdview */
+#mdview h1, #mdview h2, #mdview h3, #mdview h4, #mdview h5, #mdview h6 {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    font-weight: 500;
+    color: #333;
+}
+
+#mdview p {
+    margin-bottom: 1em;
+    line-height: 1.6;
+}
+
+#mdview blockquote {
+    padding: 10px 20px;
+    margin: 0 0 1em;
+    border-left: 4px solid #ddd;
+    background-color: #f9f9f9;
+    color: #666;
+}
+
+#mdview code {
+    background-color: #f0f0f0;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95em;
+}
+
+/* Estilos para tabelas */
+#mdview table {
+    width: 100%;
+    margin-bottom: 1em;
+    border-collapse: collapse;
+}
+
+#mdview th, #mdview td {
+    padding: 12px 15px;
+    border: 1px solid #e0e0e0;
+    text-align: left;
+}
+
+#mdview th {
+    background-color: #f5f5f5;
+    font-weight: 500;
+}
+
+/* Estilos para os avisos */
+.warning-badge {
+    display: block;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.warning-badge .badge {
+    margin-right: 5px;
+}
+
+.text-success {
+    color: #28a745 !important;
+}
+
+.text-warning {
+    color: #ffc107 !important;
+}
+
+.text-danger {
+    color: #dc3545 !important;
+}
+
+/* Estilos para o painel de estatísticas */
+#statistics {
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+}
+
+#stats-info {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#stats-info p {
+    margin: 0 15px 0 0;
+    font-size: 1em;
+    color: #555;
+}
+
+#stats-info span {
+    font-weight: 500;
+}
+
+/* Estilos para os botões */
+#file-actions {
+    display: flex;
+    align-items: center;
+}
+
+#file-actions button {
+    margin-left: 10px;
+}
+
+#file-input {
+    display: none; /* O input de arquivo permanece oculto */
+}
+
+/* Estilos para os popovers */
+.popover {
+    font-size: 0.9em;
+}
+
+/* Estilos para os destaques das regras */
+[data-bs-toggle="popover"] {
+    cursor: pointer;
+    border-bottom: 1px dashed #999;
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+    #main-container {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    #editor-container, #viewer-container {
+        width: 100%;
+        height: auto;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    #viewer-container {
+        flex-direction: column;
+    }
+
+    #mdview {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    #sidebar {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    #statistics {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding: 10px;
+    }
+
+    #stats-info {
+        margin-bottom: 10px;
+    }
+
+    #file-actions {
+        margin-top: 10px;
+    }
+}

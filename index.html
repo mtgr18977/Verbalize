@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Editor Markdown com Análise Gramatical</title>
+    <!-- Incluindo o CSS do Bootstrap -->
+    <link rel="stylesheet" href="libs/bootstrap.min.css">
+    <!-- Incluindo o CSS do Highlight.js via CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+    <!-- Incluindo o seu CSS personalizado -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Contêiner principal -->
+<div id="main-container">
+
+    <!-- Contêiner do editor -->
+    <div id="editor-container">
+        <div id="editor"># Bem-vindo ao Editor Markdown</div>
+    </div>
+
+    <!-- Contêiner do visualizador e barra lateral -->
+    <div id="viewer-container">
+
+        <!-- Visualizador Markdown -->
+        <div id="mdview"></div>
+
+        <!-- Barra lateral dos avisos -->
+        <div id="sidebar">
+            <h3>Avisos</h3>
+            <div id="mdviewSummary"></div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Painel de Estatísticas -->
+<div id="statistics">
+    <div id="stats-info">
+        <p>Sentenças: <span id="sentences">0</span></p>
+        <p>Palavras: <span id="words">0</span></p>
+        <p>Caracteres: <span id="characters">0</span></p>
+        <p>Avisos: <span id="warnings" class="text-success">0</span></p>
+    </div>
+    <!-- Botões de Upload e Download -->
+    <div id="file-actions">
+        <input type="file" id="file-input" accept=".md,.markdown,.txt">
+        <button id="upload-button" class="btn btn-secondary btn-sm">Upload</button>
+        <button id="download-button" class="btn btn-secondary btn-sm">Download</button>
+    </div>
+</div>
+
+<!-- Incluindo as bibliotecas JavaScript -->
+<!-- jQuery (necessário para Bootstrap popovers) -->
+<script src="libs/jquery.min.js"></script>
+<!-- Bootstrap JS (inclui Popper.js) -->
+<script src="libs/bootstrap.bundle.min.js"></script>
+<!-- Ace Editor -->
+<script src="libs/ace.js"></script>
+<script src="libs/mode-markdown.js"></script>
+<script src="libs/theme-chrome.js"></script>
+<!-- Markdown-it -->
+<script src="libs/markdown-it.min.js"></script>
+<!-- Plugin Footnote do Markdown-it -->
+<script src="libs/markdown-it-footnote.min.js"></script>
+<!-- Highlight.js via CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<!-- DOMPurify -->
+<script src="libs/purify.min.js"></script>
+<!-- Seu script personalizado -->
+<script src="script.js"></script>
+
+</body>
+</html>

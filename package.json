@@ -1,0 +1,26 @@
+{
+  "name": "editor-markdown",
+  "version": "1.0.0",
+  "description": "Editor Markdown com análise gramatical",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^25.2.0"
+  },
+  "author": "Seu Nome",
+  "license": "MIT",
+  "keywords": [],
+  "dependencies": {
+    "ace-builds": "^1.36.4",
+    "bootstrap": "^5.3.3",
+    "dompurify": "^3.1.7",
+    "highlight.js": "^11.10.0",
+    "http-server": "^14.1.1",
+    "jquery": "^3.7.1",
+    "markdown-it": "^14.1.0",
+    "markdown-it-footnote": "^4.0.0",
+    "popper.js": "^1.16.1"
+  }
+}
