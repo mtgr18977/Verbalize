@@ -18,7 +18,13 @@ Verbalize é um editor Markdown avançado com análise gramatical e estilística
 
 ## Capturas de Tela
 
-*SOON*
+### Visão geral
+
+![](https://raw.githubusercontent.com/mtgr18977/Verbalize/refs/heads/main/imgs/tela_1.png)
+
+### Visão com highlights de um documento
+
+![](https://raw.githubusercontent.com/mtgr18977/Verbalize/refs/heads/main/imgs/tela_2.png)
 
 ## Instalação
 
