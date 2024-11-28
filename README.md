@@ -1,4 +1,126 @@
 # Verbalize is a fork based on the Techscriptor editor for English. Please, check the work of Constantin Brîncoveanu @ https://github.com/cbrincoveanu/techscriptor
+***
+# English version
+***
+
+# Verbalize
+Verbalize is an advanced Markdown editor with grammatical and stylistic analysis for Brazilian Portuguese. Designed to help writers, students, and professionals improve the clarity and readability of their texts, Verbalize provides an intuitive interface for enhancing writing.
+
+***
+
+## Features
+
+- **Real-Time Markdown Editor**: Write in Markdown and preview your content instantly.
+- **Grammatical and Stylistic Analysis**: Receive feedback on text readability, including long sentences, passive voice, overused adverbs, clichés, jargon, and more.
+- **Syntax Highlighting**: Automatically highlights inserted code for better readability.
+- **Import and Export Files**: Import `.md`, `.markdown`, and `.txt` files, and export your work in Markdown format.
+- **Minimalist Interface**: A clean, writing-focused design with a responsive layout adaptable to different screen sizes.
+- **Desktop Application**: Available as a cross-platform desktop app using Electron.
+
+## Screenshots
+
+### Overview
+
+![](https://raw.githubusercontent.com/mtgr18977/Verbalize/refs/heads/main/imgs/tela_1.png)
+
+### Highlighted Document View
+
+![](https://raw.githubusercontent.com/mtgr18977/Verbalize/refs/heads/main/imgs/tela_2.png)
+
+## Installation
+
+### Run as a Web App
+
+1. Clone the Repository: `git clone https://github.com/your-user/verbalize.git`
+2. Navigate to the Project Directory: `cd verbalize`
+3. Install Dependencies: `npm install`
+4. Start a Local Server: `npx live-server`
+5. Open the App in Your Browser.
+   - Typically, live-server will automatically open at `http://127.0.0.1:8080`. If not, open it manually in your browser.
+
+### Run as a Desktop App (Electron)
+
+1. Clone the Repository: `git clone https://github.com/your-user/verbalize.git`
+2. Navigate to the Project Directory: `cd verbalize`
+3. Install Dependencies: `npm install`
+4. Start the Electron App: `npm start`
+5. Package the App (Optional): `npm run dist`
+
+> Packages will be generated in the `dist/` folder.
+
+## How to Use
+
+### Write in the Editor:
+- Use Markdown syntax to format your text.
+- The editor supports features such as headings, lists, links, images, code blocks, and more.
+
+### Preview the Result:
+- The side preview shows the rendered result of your Markdown.
+- Syntax highlighting is automatically applied to code blocks.
+
+### Get Real-Time Feedback:
+- The app analyzes your text and highlights areas for improvement.
+- Hover over the highlighted sections to see suggestions.
+
+### Use the Upload and Download Buttons:
+- **Upload**: Load `.md` or `.txt` files to continue editing.
+- **Download**: Download the current editor content as a Markdown (`.md`) file.
+
+### View Statistics:
+- The bottom bar displays the number of sentences, words, characters, and warnings in the text.
+
+## Grammatical and Stylistic Analysis
+
+The Verbalize editor analyzes your text for:
+
+- **Long Sentences**: Highlights sentences with over 20 words for possible simplification.
+- **Complex Words**: Flags words with more than 12 characters, suggesting simpler alternatives.
+- **Passive Voice**: Recommends using active voice for more direct communication.
+- **Excessive Adverbs**: Identifies adverbs ending in "-mente" that may be unnecessary.
+- **Clichés and Overused Expressions**: Highlights terms that may make the text less original.
+- **Technical Jargon**: Flags technical terms that could be replaced with more accessible language.
+- **Overuse of Transition Words**: Suggests revision when excessive connectors are present.
+- **Double Negatives**: Identifies constructions that may confuse the reader.
+- **Word Repetition**: Highlights consecutive repetitions that can be avoided.
+
+## Features
+
+- **Ace Editor**: Advanced text editor with syntax highlighting and line numbering.
+- **Markdown-it**: Library for rendering Markdown with extension support.
+- **Highlight.js**: Syntax highlighting for code blocks in the preview.
+- **Bootstrap Popovers**: Displays warning messages when interacting with highlighted sections.
+- **DOMPurify**: Sanitizes content to prevent malicious code execution.
+
+## Technologies Used
+
+- **HTML5 and CSS3**: Basic structure and styles of the app.
+- **JavaScript (ES6+)**: App logic and DOM manipulation.
+- **Ace Editor**: Embedded advanced text editor.
+- **Markdown-it**: Markdown rendering.
+- **Highlight.js**: Code syntax highlighting.
+- **Bootstrap**: UI components and popovers.
+- **jQuery**: Simplified DOM manipulation.
+- **Electron**: Desktop app packaging.
+- **DOMPurify**: Ensures security when handling HTML content.
+
+## Contribution
+
+Contributions are welcome! Feel free to open issues and pull requests in the project repository.
+
+### To contribute:
+1. Fork the repository.
+2. Create a Branch for your Feature or Bug Fix: `git checkout -b my-feature`
+3. Make the changes and commit: `git commit -m "My new feature"`
+4. Push to the remote repository: `git push origin my-feature`
+5. Open a Pull Request (PR).
+
+## License
+
+This project is licensed under the MIT license. See the LICENSE file for details.
+
+***
+
+# Portuguese version
 
 ***
 
