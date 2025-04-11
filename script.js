@@ -1,286 +1,155 @@
-// Inicialização do editor Ace
-var editor = ace.edit("editor");
-editor.setTheme("ace/theme/chrome");
-editor.session.setMode("ace/mode/markdown");
-editor.setOptions({
-    fontSize: "14px",
-    vScrollBarAlwaysVisible: true,
-    wrap: true
-});
+import { rulesPtBr, applyAllRules } from './rules.js';
 
-// Função para carregar os popovers do Bootstrap
-function loadPopovers() {
-    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-    var popoverList = popoverTriggerList.map(function (element) {
-        return new bootstrap.Popover(element, {
-            trigger: 'hover focus',
-            html: true
-        });
-    });
+// Constants   
+let md; 
+if (typeof window !== 'undefined') {
+    md = window.markdownit().use(window.markdownitFootnote);
 }
+export const LONG_SENTENCE_MAX_WORDS = 20;
 
-// Inicializa o Markdown-it com o plugin de notas de rodapé
-var md = window.markdownit().use(window.markdownitFootnote);
+const WARNING_BADGE_CLASS = "warning-badge";
+
+
+// Function to load Bootstrap popovers
+if (typeof window !== 'undefined') {
+  function loadPopovers() {
+      const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+      popoverTriggerList.map((popoverTrigger) => {
+          new bootstrap.Popover(popoverTrigger, {
+            trigger: 'hover focus',
+            html: true,
+          });
+      });
+  }
+}
 
 // Listener para antes de fechar a janela
+
 const beforeUnloadListener = (event) => {
-    event.preventDefault();
-    return event.returnValue = "Você tem certeza que deseja sair?";
+  event.preventDefault();
+  return event.returnValue = "Are you sure you want to leave?";
 };
+// Remove the window check
+function loadPopoversAndHighlight() {    
+    try {
+        if (typeof window !== 'undefined') {
+        loadPopovers();
+        hljs.highlightAll();
+        addEventListener("beforeunload", beforeUnloadListener, { capture: true });
+        }
+    } catch (error) {
+        console.error('Error in loadPopoversAndHighlight:', error);
+    }   
+  }
 
-// Funções para contar palavras e sentenças
-function countWords(str) {
-    const arr = str.trim().split(/\s+/);
-    return arr.filter(word => word !== '').length;
+
+// Functions to count words and sentences  
+export function countWords(str) {
+  const arr = str.trim().split(/\s+/);
+  return arr.filter(word => word !== '').length;
 }
-
-function countSentences(str) {
+export function countSentences(str) {    
     const matches = str.match(/[^\.!\?]+[\.!\?]+/g);
+
     return matches ? matches.length : 0;
 }
+// Function to render Markdown    
 
-// Regras de análise gramatical e estilística em português (atualizadas)
-const rulesPtBr = {
-    "fraseLonga": {
-        "regex": /([^\.\?\!]+[\.!\?]+)/g,
-        "message": "Esta frase é muito longa. Considere dividir em sentenças menores.",
-        "color": "#f4cccc",
-        "summary": " frases longas detectadas.",
-        "summarySingle": " frase longa detectada.",
-        "condition": function (match) {
-            // Conta palavras na frase
-            const wordCount = match.trim().split(/\s+/).length;
-            return wordCount > 20; // Frases com mais de 20 palavras
+
+export function renderMarkdown() {
+    try {
+        if (typeof DOMParser === 'undefined' || !md) {
+            return "";
         }
-    },
-    "palavraComplexa": {
-        "regex": /\b\w{13,}\b/g,
-        "message": "Considere usar palavras mais curtas para melhorar a legibilidade.",
-        "color": "#d9ead3",
-        "summary": " palavras complexas detectadas.",
-        "summarySingle": " palavra complexa detectada."
-    },
-    "vozPassiva": {
-        "regex": /\b(foi|foram|será|serão|é|são|era|eram|seja|sejam|fosse|fossem)\s+(?:\w+\s+)*(ado|ido|ada|ida|ados|idos|adas|idas)\b/gi,
-        "message": "Voz passiva detectada. Considere usar a voz ativa.",
-        "color": "#fff2cc",
-        "summary": " utilizações de voz passiva.",
-        "summarySingle": " utilização de voz passiva."
-    },
-    "adverbioExcessivo": {
-        "regex": /\b\w+mente\b/gi,
-        "message": "Uso de advérbio em excesso. Verifique se é necessário.",
-        "color": "#d0e0e3",
-        "summary": " advérbios detectados.",
-        "summarySingle": " advérbio detectado."
-    },
-    "cliches": {
-        "regex": /\b(a nível de|literalmente|sustentabilidade|paradigma|proativo|sinergia|agregar valor|pensar fora da caixa|no final do dia|mais do que nunca)\b/gi,
-        "message": "Evite clichês e expressões muito usadas.",
-        "color": "#fce5cd",
-        "summary": " clichês detectados.",
-        "summarySingle": " clichê detectado."
-    },
-    "jargao": {
-        "regex": /\b(alavancar|stakeholders|empowerment|benchmarking|downsizing|feedback|brainstorming|core business)\b/gi,
-        "message": "Termo técnico detectado. Considere usar linguagem mais simples.",
-        "color": "#ead1dc",
-        "summary": " jargões detectados.",
-        "summarySingle": " jargão detectado."
-    },
-    "transicaoExcessiva": {
-        "regex": /\b(portanto|além disso|contudo|no entanto|assim|consequentemente|desse modo|por conseguinte|em suma)\b/gi,
-        "message": "Uso excessivo de palavras de transição pode afetar a fluidez do texto.",
-        "color": "#c9daf8",
-        "summary": " palavras de transição em excesso.",
-        "summarySingle": " palavra de transição em excesso."
-    },
-    "negacaoDupla": {
-        "regex": /\b(não\s+.*\bnão\b|nunca\s+.*\bnão\b|nunca\s+.*\bnunca\b)\b/gi,
-        "message": "Dupla negativa detectada. Isso pode confundir o leitor.",
-        "color": "#e6b8af",
-        "summary": " negativas duplas detectadas.",
-        "summarySingle": " negativa dupla detectada."
-    },
-    "palavrasRepetidas": {
-        "regex": /\b(\w+)\b\s+\b\1\b/gi,
-        "message": "Evite repetir a mesma palavra consecutivamente.",
-        "color": "#b6d7a8",
-        "summary": " repetições de palavras.",
-        "summarySingle": " repetição de palavra."
-    },
-    // Adicione mais regras conforme necessário
-};
-
-// Função para atualizar a visualização
-function updateView() {
-    // Renderiza o Markdown em um elemento DOM
-    var mdContent = md.render(editor.getValue());
-    var parser = new DOMParser();
-    var doc = parser.parseFromString(mdContent, 'text/html');
-
-    var ruleReplacements = {};
-    for (var label in rulesPtBr) {
-        ruleReplacements[label] = 0;
-    }
-
-    function traverseNodes(node) {
-        // Se for um nó de texto, aplicar as regras
-        if (node.nodeType === Node.TEXT_NODE) {
-            var textContent = node.textContent;
-            var parent = node.parentNode;
-
-            var hasMatch = false;
-            var newContent = document.createDocumentFragment();
-
-            for (var label in rulesPtBr) {
-                var rule = rulesPtBr[label];
-                var regex = new RegExp(rule.regex); // Criar nova instância para evitar problemas com lastIndex
-                var lastIndex = 0;
-                var match;
-
-                while ((match = regex.exec(textContent)) !== null) {
-                    // Se houver uma condição adicional, verificar
-                    if (rule.condition && !rule.condition(match[0])) {
-                        continue;
-                    }
-
-                    hasMatch = true;
-
-                    // Adiciona o texto antes da correspondência
-                    if (match.index > lastIndex) {
-                        newContent.appendChild(document.createTextNode(textContent.substring(lastIndex, match.index)));
-                    }
-
-                    // Cria o elemento com popover
-                    var span = document.createElement('span');
-                    span.setAttribute('style', `background: ${rule.color};`);
-                    span.setAttribute('tabindex', '0');
-                    span.setAttribute('data-bs-toggle', 'popover');
-                    span.setAttribute('data-bs-trigger', 'focus');
-                    span.setAttribute('data-bs-placement', 'top');
-                    span.setAttribute('data-bs-content', rule.message);
-                    span.textContent = match[0];
-                    newContent.appendChild(span);
-
-                    ruleReplacements[label]++;
-
-                    lastIndex = match.index + match[0].length;
-
-                    // Prevenir loops infinitos em regexes vazias
-                    if (match.index === regex.lastIndex) {
-                        regex.lastIndex++;
-                    }
-                }
-
-                // Se houve correspondência, adiciona o texto restante
-                if (hasMatch) {
-                    if (lastIndex < textContent.length) {
-                        newContent.appendChild(document.createTextNode(textContent.substring(lastIndex)));
-                    }
-                    break; // Evita aplicar múltiplas regras no mesmo trecho
-                }
-            }
-
-            if (hasMatch) {
-                parent.replaceChild(newContent, node);
-            }
-        } else {
-            // Se for outro tipo de nó, percorrer os filhos
-            var children = Array.from(node.childNodes); // Cria uma cópia da lista de filhos
-            for (var i = 0; i < children.length; i++) {
-                traverseNodes(children[i]);
-            }
+        const markdownContent = md.render('');
+        const parser = new DOMParser();
+        const parsed = parser.parseFromString(markdownContent, 'text/html');
+        if(!parsed){
+          return ""; 
         }
-    }
-
-    traverseNodes(doc.body);
-
-    // Atualiza o resumo das regras aplicadas
-    var rulesSummary = "";
-    for (var label in rulesPtBr) {
-        var count = ruleReplacements[label];
-        var summaryText = count === 1 ? rulesPtBr[label].summarySingle : rulesPtBr[label].summary;
-        if (count > 0) {
-            rulesSummary += `<div class="warning-badge" style="background: ${rulesPtBr[label].color};">
-                                <span class="badge bg-secondary">${count}</span>
-                                ${summaryText}
-                             </div>`;
-        }
-    }
-    document.getElementById('mdviewSummary').innerHTML = rulesSummary;
-
-    // Atualiza o conteúdo do visualizador
-    document.getElementById('mdview').innerHTML = doc.body.innerHTML;
-
-    // Atualiza as estatísticas
-    var outputText = doc.body.textContent || "";
-    var sentences = countSentences(outputText);
-    var words = countWords(outputText);
-    var characters = outputText.length;
-    var warnings = Object.values(ruleReplacements).reduce((a, b) => a + b, 0);
-
-    document.getElementById('sentences').innerHTML = sentences;
-    document.getElementById('words').innerHTML = words;
-    document.getElementById('characters').innerHTML = characters;
-    document.getElementById('warnings').innerHTML = warnings;
-
-    var warningsRatio = warnings / words;
-    var warningsClass = "text-success";
-    if (warningsRatio > 0.05) {
-        warningsClass = "text-danger";
-    } else if (warningsRatio > 0.03) {
-        warningsClass = "text-warning";
-    }
-    document.getElementById('warnings').className = warningsClass;
-
-    loadPopovers();
-    hljs.highlightAll();
-    addEventListener("beforeunload", beforeUnloadListener, { capture: true });
+        return parsed;
+    } catch (error) {
+        console.error('Error in renderMarkdown:', error);
+      }
 }
 
-// Chama updateView inicialmente e ao mudar o conteúdo do editor
-updateView();
-
-let debounceTimer;
-editor.session.on('change', function (delta) {
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(updateView, 300);
-});
-
-// Função para lidar com o upload de arquivo
-document.getElementById('upload-button').addEventListener('click', function () {
-    document.getElementById('file-input').click();
-});
-
-document.getElementById('file-input').addEventListener('change', function (event) {
-    var file = event.target.files[0];
-    if (file) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            editor.setValue(e.target.result, -1); // -1 move o cursor para o início
-            updateView();
-        };
-        reader.readAsText(file);
+export function applyRules(doc) {
+    let newDoc;
+    if (typeof DOMParser !== 'undefined') {
+      newDoc = applyAllRules(doc.body.textContent);
     }
-});
+    return newDoc;
+}
 
-// Função para fazer o download do conteúdo do editor
-document.getElementById('download-button').addEventListener('click', function () {
-    var textToSave = editor.getValue();
-    var blob = new Blob([textToSave], { type: "text/markdown;charset=utf-8" });
-    var filename = "documento.md";
 
-    if (window.navigator.msSaveOrOpenBlob) {
-        // Para IE e Edge
-        window.navigator.msSaveBlob(blob, filename);
-    } else {
-        // Para outros navegadores
-        var link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = filename;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+// Function to update the summary  
+export function updateSummary(ruleCounts) {
+  if (typeof document !== 'undefined') {
+      const summaryContainer = document.getElementById('mdviewSummary');
+      let summaryHTML = "";
+      for (const label in rulesPtBr) {
+          const count = ruleCounts[label];
+          const summaryText = count === 1 ? rulesPtBr[label].summarySingle : rulesPtBr[label].summary;
+          if (count > 0) {
+              summaryHTML += `<div class="${WARNING_BADGE_CLASS}" style="background: ${rulesPtBr[label].color};"><span class="badge bg-secondary">${count}</span>${summaryText}</div>`;
+          }
+      }
+      summaryContainer.innerHTML = summaryHTML;
     }
-});
+}export function updateStats(ruleCounts) {
+  if (typeof document !== 'undefined') {
+      let warningsClass = "text-success";
+      const outputText = document.getElementById('mdview').textContent || "";
+      const sentences = countSentences(outputText);
+      const words = countWords(outputText);
+      const characters = outputText.length;
+      const warnings = Object.values(ruleCounts).reduce((a, b) => a + b, 0);
+      const sentencesElement = document.getElementById('sentences');
+      const wordsElement = document.getElementById('words');
+      const charactersElement = document.getElementById('characters');
+      const warningsElement = document.getElementById('warnings');
+
+      const warningsRatio = warnings / words;
+      if (warningsRatio > 0.05) {
+        warningsClass = "text-danger";
+      } else if (warningsRatio > 0.03) {
+        warningsClass = "text-warning";
+      }
+      sentencesElement.textContent = sentences;
+      wordsElement.textContent = words;
+      charactersElement.textContent = characters;
+      warningsElement.textContent = warnings;
+      warningsElement.className = warningsClass;
+
+      document.getElementById('warnings').className = warningsClass;
+    }
+}
+function updateView() {
+    const doc = renderMarkdown();
+    if (doc) {
+        if (doc.body) {
+            if (typeof window !== 'undefined') {
+              if (typeof document !== 'undefined') {
+                const mdview = document.getElementById('mdview');                  
+                  if (mdview) {
+                    mdview.innerHTML = doc.body.innerHTML;
+                  }
+                }
+                const ruleReplacements = applyRules(doc);   
+                if (typeof document !== 'undefined') {             updateSummary(ruleReplacements);                updateStats(ruleReplacements);                loadPopoversAndHighlight();}
+                
+            }
+        }        
+      }
+    }
+
+if (typeof window !== 'undefined') {
+  // Chama updateView inicialmente e ao mudar o conteúdo do editor
+  updateView();
+
+  // Import the tests and run them only if running in a browser environment
+  const { runTests } = await import('./runTests.mjs');
+  runTests();
+} else {
+  console.log('Running in Node.js, skipping browser-specific code.');
+}

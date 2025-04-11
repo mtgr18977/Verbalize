@@ -1,6 +1,7 @@
 {
   "name": "verbalize-editor",
   "version": "1.0.0",
+  "type": "module",
   "description": "Verbalize - Editor Markdown com análise gramatical",
   "main": "main.js",
   "scripts": {
