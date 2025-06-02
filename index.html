@@ -26,14 +26,17 @@
         <!-- Visualizador Markdown -->
         <div id="mdview"></div>
 
-        <!-- Barra lateral dos avisos -->
         <div id="sidebar">
-            <h3>Avisos</h3>
-            <div id="mdviewSummary"></div>
+            <div id="warnings-panel" class="warnings-panel">
+                <h3>Avisos</h3>
+                <div id="mdviewSummary"></div>
+            </div>
+            <div id="readability-metrics" class="metrics-panel">
+                <h3>Leiturabilidade</h3>
+                <ul id="metrics-list"></ul>
+            </div>
         </div>
-
     </div>
-
 </div>
 
 <!-- Painel de Estatísticas -->
@@ -70,7 +73,7 @@
 <!-- DOMPurify -->
 <script src="libs/purify.min.js"></script>
 <!-- Seu script personalizado -->
+<script src="textstat.js"></script>
 <script src="script.js"></script>
-
 </body>
 </html>

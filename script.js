@@ -234,9 +234,44 @@ function updateView() {
     }
     document.getElementById('warnings').className = warningsClass;
 
+    // Atualiza os índices de leiturabilidade na barra lateral
+    updateReadabilityMetrics(outputText);
+
     loadPopovers();
     hljs.highlightAll();
     addEventListener("beforeunload", beforeUnloadListener, { capture: true });
+}
+
+function updateReadabilityMetrics(text) {
+    if (!window.textstat) return; // Garante que textstat está carregado
+    const metrics = [
+        { label: "Flesch Reading Ease (EN)", value: textstat.flesch_reading_ease(text).toFixed(1), type: "flesch" },
+        { label: "Flesch-Kincaid Grade", value: textstat.flesch_kincaid_grade(text).toFixed(1) },
+        { label: "Flesch BR", value: textstat.flesch_reading_ease_ptbr(text).toFixed(1), type: "flesch" },
+        { label: "SMOG", value: textstat.smog_index(text).toFixed(1) },
+        { label: "Coleman-Liau", value: textstat.coleman_liau_index(text).toFixed(1) },
+        { label: "Gunning Fog", value: textstat.gunning_fog(text).toFixed(1) }
+    ];
+    const ul = document.getElementById('metrics-list');
+    ul.innerHTML = '';
+    metrics.forEach(m => {
+        const li = document.createElement('li');
+        li.textContent = `${m.label}: `;
+
+        const span = document.createElement('span');
+        span.textContent = m.value;
+
+        // Destaque visual para Flesch (EN e BR)
+        if (m.type === "flesch") {
+            const v = parseFloat(m.value);
+            if (v >= 60) li.classList.add('easy');
+            else if (v >= 30) li.classList.add('medium');
+            else li.classList.add('hard');
+        }
+
+        li.appendChild(span);
+        ul.appendChild(li);
+    });
 }
 
 // Chama updateView inicialmente e ao mudar o conteúdo do editor
