@@ -1,8 +1,3 @@
-# Verbalize is a fork based on the Techscriptor editor for English. Please, check the work of Constantin Brîncoveanu @ https://github.com/cbrincoveanu/techscriptor
-***
-# English version
-***
-
 # Verbalize
 Verbalize is an advanced Markdown editor with grammatical and stylistic analysis for Brazilian Portuguese. Designed to help writers, students, and professionals improve the clarity and readability of their texts, Verbalize provides an intuitive interface for enhancing writing.
 
