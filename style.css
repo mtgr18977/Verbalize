@@ -1,162 +1,225 @@
-/* Estilos gerais */
+/* Modernized General Styles */
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Inter', 'Roboto', Arial, sans-serif;
     margin: 0;
     padding: 0;
     height: 100vh;
     overflow: hidden;
-    background-color: #f8f9fa; /* Changed from #f5f5f5 */
-    color: #343a40; /* Changed from #333 */
+    background: linear-gradient(120deg, #f8fafc 0%, #e9ecef 100%);
+    color: #23272f;
+    letter-spacing: 0.01em;
 }
 
-/* Contêiner principal */
+/* Main Container */
 #main-container {
     display: flex;
-    height: calc(100vh - 50px); /* Desconta a altura do painel de estatísticas */
-    padding: 10px; /* Adicionado padding para criar espaço interno */
+    height: calc(100vh - 56px);
+    padding: 18px;
+    gap: 18px;
     box-sizing: border-box;
 }
 
-/* Estilos para o editor */
+/* Editor Styles */
 #editor-container {
     width: 50%;
-    border-right: 1px solid #dee2e6; /* Changed from #e0e0e0 */
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px 0 rgba(60,72,88,0.07);
+    margin-right: 0;
+    border: none;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
-    background-color: #ffffff;
-    margin-right: 10px; /* Espaçamento à direita */
-    border: 1px solid #dee2e6; /* Changed from #ddd */
-    box-sizing: border-box;
+    transition: box-shadow 0.2s;
+}
+
+#editor-container:focus-within {
+    box-shadow: 0 4px 24px 0 rgba(60,72,88,0.13);
 }
 
 #editor {
-    height: 100%;
+    flex: 1;
     width: 100%;
-    position: relative;
-    overflow: auto;
-    background-color: #ffffff;
-    padding: 20px;
+    background: #f6f8fa;
+    padding: 24px;
+    border: none;
+    outline: none;
+    font-size: 1.08em;
+    border-radius: 0 0 16px 16px;
     box-sizing: border-box;
+    resize: none;
+    transition: background 0.2s;
 }
 
-/* Estilos para o visualizador e barra lateral */
+/* Viewer and Sidebar */
 #viewer-container {
     width: 50%;
     display: flex;
     flex-direction: row;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px 0 rgba(60,72,88,0.07);
     overflow: hidden;
-    border: 1px solid #dee2e6; /* Changed from #ddd */
-    box-sizing: border-box;
+    border: none;
+    transition: box-shadow 0.2s;
 }
 
 #mdview {
     width: 70%;
-    padding: 20px;
+    padding: 24px;
     overflow-y: auto;
-    background-color: #f8f9fa; /* Changed from #fafafa */
+    background: #f8fafc;
+    border-right: 1px solid #e3e7ed;
     box-sizing: border-box;
-    border-right: 1px solid #dee2e6; /* Changed from #e0e0e0 */
 }
 
 #sidebar {
     width: 30%;
-    padding: 20px;
+    padding: 24px;
     overflow-y: auto;
-    background-color: #ffffff;
+    background: #fff;
     box-sizing: border-box;
 }
 
 #sidebar h3 {
     margin-top: 0;
-    font-weight: 500;
-    color: #343a40; /* Changed from #555 */
+    font-weight: 600;
+    color: #23272f;
+    letter-spacing: 0.02em;
 }
 
-/* Estilos para o conteúdo do mdview */
+/* Markdown Content */
 #mdview h1, #mdview h2, #mdview h3, #mdview h4, #mdview h5, #mdview h6 {
-    margin-top: 1em;
-    margin-bottom: 0.5em;
-    font-weight: 500;
-    color: #343a40; /* Changed from #333 */
+    margin-top: 1.2em;
+    margin-bottom: 0.6em;
+    font-weight: 600;
+    color: #23272f;
 }
 
 #mdview p {
-    margin-bottom: 1em;
-    line-height: 1.6;
+    margin-bottom: 1.1em;
+    line-height: 1.7;
 }
 
 #mdview blockquote {
-    padding: 10px 20px;
-    margin: 0 0 1em;
-    border-left: 4px solid #dee2e6; /* Changed from #ddd */
-    background-color: #f8f9fa; /* Changed from #f9f9f9 */
-    color: #6c757d; /* Changed from #666 */
+    padding: 14px 24px;
+    margin: 0 0 1.2em;
+    border-left: 4px solid #4f8cff;
+    background: #f0f6ff;
+    color: #3a4a5d;
+    border-radius: 8px;
+    font-style: italic;
 }
 
 #mdview code {
-    background-color: #e9ecef; /* Changed from #f0f0f0 */
-    padding: 2px 4px;
-    border-radius: 4px;
-    font-family: 'Courier New', monospace;
-    font-size: 0.95em;
+    background: #e3e7ed;
+    padding: 3px 7px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', 'Fira Mono', 'Courier New', monospace;
+    font-size: 0.98em;
+    color: #2d3a4a;
 }
 
-/* Estilos para tabelas */
+/* Tables */
 #mdview table {
     width: 100%;
-    margin-bottom: 1em;
-    border-collapse: collapse;
+    margin-bottom: 1.2em;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px 0 rgba(60,72,88,0.04);
 }
 
 #mdview th,
 #mdview td {
-    padding: 12px 15px;
-    border: 1px solid #dee2e6; /* Changed from #e0e0e0 */
+    padding: 14px 18px;
+    border-bottom: 1px solid #e3e7ed;
     text-align: left;
 }
 
 #mdview th {
-    background-color: #e9ecef; /* Changed from #f5f5f5 */
+    background: #f6f8fa;
+    font-weight: 600;
+    color: #23272f;
+}
+
+#mdview tr:last-child td {
+    border-bottom: none;
+}
+
+/* Warnings & Badges */
+#warnings-panel, .warnings-panel {
+    margin-bottom: 24px;
+    padding: 16px 18px 12px 18px;
+    background: #f6f8fa;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px 0 rgba(60,72,88,0.04);
+}
+
+#warnings-panel h3, .warnings-panel h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 1.13em;
+    color: #23272f;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+#mdviewSummary {
+    margin: 0;
+    padding: 0;
+}
+
+.warning-badge {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    padding: 7px 12px;
+    border-radius: 7px;
+    background: #fff;
+    font-size: 1em;
+    color: #2d3a4a;
+    box-shadow: 0 1px 2px 0 rgba(60,72,88,0.03);
     font-weight: 500;
 }
 
-/* Estilos para os avisos */
-.warning-badge {
-    display: block;
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 6px;
-    color: #fff;
-    font-size: 0.9em;
-    font-weight: 500;
+.warning-badge:last-child {
+    margin-bottom: 0;
 }
 
 .warning-badge .badge {
-    margin-right: 5px;
+    margin-right: 10px;
+    font-size: 0.95em;
+    font-weight: 600;
 }
 
 .text-success {
-    color: #28a745 !important;
+    color: #2ecc71 !important;
 }
 
 .text-warning {
-    color: #ffc107 !important;
+    color: #f1c40f !important;
 }
 
 .text-danger {
-    color: #dc3545 !important;
+    color: #e74c3c !important;
 }
 
-/* Estilos para o painel de estatísticas */
+/* Statistics Panel */
 #statistics {
-    padding: 10px 20px;
-    background-color: #ffffff;
-    border-top: 1px solid #dee2e6; /* Changed from #e0e0e0 */
+    padding: 12px 28px;
+    background: #fff;
+    border-top: 1px solid #e3e7ed;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 50px;
+    height: 56px;
     box-sizing: border-box;
     flex-wrap: wrap;
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 -1px 8px 0 rgba(60,72,88,0.04);
 }
 
 #stats-info {
@@ -165,46 +228,73 @@ body {
 }
 
 #stats-info p {
-    margin: 0 15px 0 0;
-    font-size: 1em;
-    color: #6c757d; /* Changed from #555 */
+    margin: 0 18px 0 0;
+    font-size: 1.02em;
+    color: #6c757d;
 }
 
 #stats-info span {
-    font-weight: 500;
+    font-weight: 600;
 }
 
-/* Estilos para os botões */
+/* File Actions & Buttons */
 #file-actions {
     display: flex;
     align-items: center;
+    gap: 10px;
 }
 
 #file-actions button {
-    margin-left: 10px;
+    background: #63666b;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 1px 4px 0 rgba(60,72,88,0.07);
+    transition: background 0.2s, box-shadow 0.2s, color 0.2s;
 }
+
+#file-actions button:hover, #file-actions button:focus {
+    background: #1a325f;
+    color: #fff;
+    box-shadow: 0 2px 8px 0 rgba(60,72,88,0.13);
+    outline: none;
+}
+
 
 #file-input {
-    display: none; /* O input de arquivo permanece oculto */
+    display: none;
 }
 
-/* Estilos para os popovers */
+/* Popovers */
 .popover {
-    font-size: 0.9em;
+    font-size: 1em;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px 0 rgba(60,72,88,0.13);
 }
 
-/* Estilos para os destaques das regras */
+/* Rule Highlights */
 [data-bs-toggle="popover"] {
     cursor: pointer;
-    border-bottom: 1px dashed #999;
+    border-bottom: 1px dashed #4f8cff;
+    color: #4f8cff;
+    transition: color 0.2s;
 }
 
-/* Responsividade */
+[data-bs-toggle="popover"]:hover {
+    color: #38d9a9;
+}
+
+/* Responsiveness */
 @media (max-width: 992px) {
     #main-container {
         flex-direction: column;
         height: auto;
-        padding: 10px;
+        padding: 12px;
+        gap: 12px;
     }
 
     #editor-container,
@@ -212,7 +302,7 @@ body {
         width: 100%;
         height: auto;
         margin-right: 0;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
     }
 
     #viewer-container {
@@ -222,7 +312,7 @@ body {
     #mdview {
         width: 100%;
         border-right: none;
-        border-bottom: 1px solid #dee2e6; /* Changed from #e0e0e0 */
+        border-bottom: 1px solid #e3e7ed;
     }
 
     #sidebar {
@@ -235,7 +325,8 @@ body {
         flex-direction: column;
         align-items: flex-start;
         height: auto;
-        padding: 10px;
+        padding: 12px;
+        border-radius: 0 0 12px 12px;
     }
 
     #stats-info {
@@ -245,4 +336,71 @@ body {
     #file-actions {
         margin-top: 10px;
     }
+
+    #editor, #mdview, #sidebar {
+        padding: 14px;
+    }
 }
+
+.metrics-panel {
+    margin-bottom: 24px;
+    padding: 16px 18px 12px 18px;
+    background: #f6f8fa;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px 0 rgba(60,72,88,0.04);
+}
+
+.metrics-panel h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 1.13em;
+    color: #23272f;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+#metrics-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#metrics-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding: 7px 12px;
+    border-radius: 7px;
+    background: #ffb8b8;
+    font-size: 1em;
+    color: #2d3a4a;
+    box-shadow: 0 1px 2px 0 rgba(160, 172, 189, 0.03);
+    transition: background 0.2s, color 0.2s;
+    font-weight: 500;
+}
+
+#metrics-list li:last-child {
+    margin-bottom: 0;
+}
+
+#metrics-list li::before {
+    content: "•";
+    color: #4b4f55;
+    font-size: 1.2em;
+    margin-right: 10px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+#metrics-list li span {
+    font-weight: 600;
+    color: #1a325f;
+    margin-left: 12px;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Opcional: destaque para índices muito fáceis/difíceis */
+#metrics-list li.easy { background: #505850; }
+#metrics-list li.medium { background: #fffbe6; }
+#metrics-list li.hard { background: #ffeaea; }
