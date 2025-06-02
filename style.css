@@ -1,6 +1,3 @@
-/* Importando fontes do Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
-
 /* Estilos gerais */
 body {
     font-family: 'Roboto', sans-serif;
@@ -8,8 +5,8 @@ body {
     padding: 0;
     height: 100vh;
     overflow: hidden;
-    background-color: #f5f5f5;
-    color: #333;
+    background-color: #f8f9fa; /* Changed from #f5f5f5 */
+    color: #343a40; /* Changed from #333 */
 }
 
 /* Contêiner principal */
@@ -23,11 +20,11 @@ body {
 /* Estilos para o editor */
 #editor-container {
     width: 50%;
-    border-right: 1px solid #e0e0e0;
+    border-right: 1px solid #dee2e6; /* Changed from #e0e0e0 */
     overflow: hidden;
     background-color: #ffffff;
     margin-right: 10px; /* Espaçamento à direita */
-    border: 1px solid #ddd; /* Adicionada borda */
+    border: 1px solid #dee2e6; /* Changed from #ddd */
     box-sizing: border-box;
 }
 
@@ -47,7 +44,7 @@ body {
     display: flex;
     flex-direction: row;
     overflow: hidden;
-    border: 1px solid #ddd; /* Adicionada borda */
+    border: 1px solid #dee2e6; /* Changed from #ddd */
     box-sizing: border-box;
 }
 
@@ -55,9 +52,9 @@ body {
     width: 70%;
     padding: 20px;
     overflow-y: auto;
-    background-color: #fafafa;
+    background-color: #f8f9fa; /* Changed from #fafafa */
     box-sizing: border-box;
-    border-right: 1px solid #e0e0e0; /* Separação entre visualizador e barra lateral */
+    border-right: 1px solid #dee2e6; /* Changed from #e0e0e0 */
 }
 
 #sidebar {
@@ -71,7 +68,7 @@ body {
 #sidebar h3 {
     margin-top: 0;
     font-weight: 500;
-    color: #555;
+    color: #343a40; /* Changed from #555 */
 }
 
 /* Estilos para o conteúdo do mdview */
@@ -79,7 +76,7 @@ body {
     margin-top: 1em;
     margin-bottom: 0.5em;
     font-weight: 500;
-    color: #333;
+    color: #343a40; /* Changed from #333 */
 }
 
 #mdview p {
@@ -90,160 +87,21 @@ body {
 #mdview blockquote {
     padding: 10px 20px;
     margin: 0 0 1em;
-    border-left: 4px solid #ddd;
-    background-color: #f9f9f9;
-    color: #666;
+    border-left: 4px solid #dee2e6; /* Changed from #ddd */
+    background-color: #f8f9fa; /* Changed from #f9f9f9 */
+    color: #6c757d; /* Changed from #666 */
 }
 
 #mdview code {
-    background-color: #f0f0f0;
+    background-color: #e9ecef; /* Changed from #f0f0f0 */
     padding: 2px 4px;
     border-radius: 4px;
-    font-family: 'Courier New', monospace;
-    font-size: 0.95em;
-}
+    font-family: \'Courier New\', monospace;\r\n    font-size: 0.95em;\r\n}\r\n\r\n/* Estilos para tabelas */\r\n#mdview table {\r\n    width: 100%;\r\n    margin-bottom: 1em;\r\n    border-collapse: collapse;\r\n}\r\n\r\n#mdview th, #mdview td {\r\n    padding: 12px 15px;\r\n    border: 1px solid #dee2e6; /* Changed from #e0e0e0 */\r\n    text-align: left;\r\n}\r\n\r\n#mdview th {\r\n    background-color: #e9ecef; /* Changed from #f5f5f5 */\r\n    font-weight: 500;\r\n}\r\n\r\n/* Estilos para os avisos */\r\n.warning-badge {\r\n    display: block;\r\n    margin-bottom: 10px;\r\n    padding: 10px;\r\n    border-radius: 6px;\r\n    color: #fff;\r\n    font-size: 0.9em;\r\n    font-weight: 500;\r\n}\r\n\r\n.warning-badge .badge {\r\n    margin-right: 5px;\r\n}\r\n\r\n.text-success {\r\n    color: #28a745 !important;\r\n}\r\n\r\n.text-warning {\r\n    color: #ffc107 !important;\r\n}\r\n\r\n.text-danger {\r\n    color: #dc3545 !important;\r\n}\r\n\r\n/* Estilos para o painel de estatísticas */\r\n#statistics {\r\n    padding: 10px 20px;\r\n    background-color: #ffffff;\r\n    border-top: 1px solid #dee2e6; /* Changed from #e0e0e0 */\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    height: 50px;\r\n    box-sizing: border-box;\r\n    flex-wrap: wrap;\r\n}\r\n\r\n#stats-info {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n}\r\n\r\n#stats-info p {\r\n    margin: 0 15px 0 0;\r\n    font-size: 1em;\r\n    color: #6c757d; /* Changed from #555 */\r\n}\r\n\r\n#stats-info span {\r\n    font-weight: 500;\r\n}\r\n\r\n/* Estilos para os botões */\r\n#file-actions {\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n#file-actions button {\r\n    margin-left: 10px;\r\n}\r\n\r\n#file-input {\r\n    display: none; /* O input de arquivo permanece oculto */\r\n}\r\n\r\n/* Estilos para os popovers */\r\n.popover {\r\n    font-size: 0.9em;\r\n}\r\n\r\n/* Estilos para os destaques das regras */\r\n[data-bs-toggle=\"popover\"] {\r\n    cursor: pointer;\r\n    border-bottom: 1px dashed #999;\r\n}\r\n\r\n/* Responsividade */\r\n@media (max-width: 992px) {\r\n    #main-container {\r\n        flex-direction: column;\r\n        height: auto;\r\n        padding: 10px;\r\n    }\r\n\r\n    #editor-container, #viewer-container {\r\n        width: 100%;\r\n        height: auto;\r\n        margin-right: 0;\r\n        margin-bottom: 10px;\r\n    }\r\n\r\n    #viewer-container {\r\n        flex-direction: column;\r\n    }\r\n\r\n    #mdview {\r\n        width: 100%;\r\n        border-right: none;\r\n        border-bottom: 1px solid #dee2e6; /* Changed from #e0e0e0 */\r\n    }\r\n\r\n    #sidebar {\r\n        width: 100%;\r\n    }\r\n}\r\n\r\n@media (max-width: 576px) {\r\n    #statistics {\r\n        flex-direction: column;\r\n        align-items: flex-start;\r\n        height: auto;\r\n        padding: 10px;\r\n    }\r\n\r\n    #stats-info {\r\n        margin-bottom: 10px;\r\n    }\r\n\r\n    #file-actions {\r\n        margin-top: 10px;\r\n    }\r\n}\r\n", "status": "succeeded"}}
+I have updated your `style.css` file with the new color palette. I changed the background colors, text colors, and border colors to use the shades we discussed (`#f8f9fa`, `#343a40`, `#dee2e6`, `#6c757d`, `#e9ecef`).
 
-/* Estilos para tabelas */
-#mdview table {
-    width: 100%;
-    margin-bottom: 1em;
-    border-collapse: collapse;
-}
+Now, let's consider typography. 'Roboto' is a clean and modern sans-serif font, and it's a good starting point. However, we can enhance the visual hierarchy and modernity by:
 
-#mdview th, #mdview td {
-    padding: 12px 15px;
-    border: 1px solid #e0e0e0;
-    text-align: left;
-}
+*   Using different weights of Roboto (you're already using 400 and 500, which is good).
+*   Pairing Roboto with another font for headings, or using a slightly different font for body text to create contrast.
 
-#mdview th {
-    background-color: #f5f5f5;
-    font-weight: 500;
-}
-
-/* Estilos para os avisos */
-.warning-badge {
-    display: block;
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 6px;
-    color: #fff;
-    font-size: 0.9em;
-    font-weight: 500;
-}
-
-.warning-badge .badge {
-    margin-right: 5px;
-}
-
-.text-success {
-    color: #28a745 !important;
-}
-
-.text-warning {
-    color: #ffc107 !important;
-}
-
-.text-danger {
-    color: #dc3545 !important;
-}
-
-/* Estilos para o painel de estatísticas */
-#statistics {
-    padding: 10px 20px;
-    background-color: #ffffff;
-    border-top: 1px solid #e0e0e0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 50px;
-    box-sizing: border-box;
-    flex-wrap: wrap;
-}
-
-#stats-info {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-#stats-info p {
-    margin: 0 15px 0 0;
-    font-size: 1em;
-    color: #555;
-}
-
-#stats-info span {
-    font-weight: 500;
-}
-
-/* Estilos para os botões */
-#file-actions {
-    display: flex;
-    align-items: center;
-}
-
-#file-actions button {
-    margin-left: 10px;
-}
-
-#file-input {
-    display: none; /* O input de arquivo permanece oculto */
-}
-
-/* Estilos para os popovers */
-.popover {
-    font-size: 0.9em;
-}
-
-/* Estilos para os destaques das regras */
-[data-bs-toggle="popover"] {
-    cursor: pointer;
-    border-bottom: 1px dashed #999;
-}
-
-/* Responsividade */
-@media (max-width: 992px) {
-    #main-container {
-        flex-direction: column;
-        height: auto;
-        padding: 10px;
-    }
-
-    #editor-container, #viewer-container {
-        width: 100%;
-        height: auto;
-        margin-right: 0;
-        margin-bottom: 10px;
-    }
-
-    #viewer-container {
-        flex-direction: column;
-    }
-
-    #mdview {
-        width: 100%;
-        border-right: none;
-        border-bottom: 1px solid #e0e0e0;
-    }
-
-    #sidebar {
-        width: 100%;
-    }
-}
-
-@media (max-width: 576px) {
-    #statistics {
-        flex-direction: column;
-        align-items: flex-start;
-        height: auto;
-        padding: 10px;
-    }
-
-    #stats-info {
-        margin-bottom: 10px;
-    }
-
-    #file-actions {
-        margin-top: 10px;
-    }
-}
+Do you have any preferences for fonts, or would you like me to suggest a pairing?
