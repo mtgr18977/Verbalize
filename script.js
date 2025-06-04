@@ -42,6 +42,8 @@ function countSentences(str) {
 // Variável para armazenar as regras de acordo com o idioma selecionado
 let rules = {};
 let currentLanguage = 'pt-br';
+let lastRuleCounts = {};
+let lastReadabilityMetrics = [];
 
 // Obtenha a chave da API da Maritaca do processo principal
 // Verifique se estamos no ambiente Electron antes de tentar importar ipcRenderer
@@ -192,6 +194,7 @@ function updateView() {
     document.getElementById('words').innerHTML = words;
     document.getElementById('characters').innerHTML = characters;
     document.getElementById('warnings').innerHTML = warnings;
+    lastRuleCounts = ruleReplacements;
 
     var warningsRatio = warnings / words;
     var warningsClass = "text-success";
@@ -203,14 +206,14 @@ function updateView() {
     document.getElementById('warnings').className = warningsClass;
 
     // Atualiza os índices de leiturabilidade na barra lateral
-    updateReadabilityMetrics(outputText);
+    lastReadabilityMetrics = updateReadabilityMetrics(outputText);
 
     loadPopovers();
     hljs.highlightAll();
     addEventListener("beforeunload", beforeUnloadListener, { capture: true });
     // Atualiza o título da janela com o número de palavras
     document.title = `Verbalize - ${words} palavras`;
-    updateReadabilityMetrics(outputText);
+    lastReadabilityMetrics = updateReadabilityMetrics(outputText);
 }
 // Função para atualizar os índices de leiturabilidade
 function updateReadabilityMetrics(text) {
@@ -258,6 +261,7 @@ function updateReadabilityMetrics(text) {
 
         ul.appendChild(li);
     });
+    return metrics;
 }
 
 // Chama updateView inicialmente e ao mudar o conteúdo do editor
@@ -301,6 +305,50 @@ document.getElementById('download-button').addEventListener('click', function ()
     } else {
         // Para outros navegadores
         var link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+});
+
+// Gera o relatório em Markdown
+function generateReport() {
+    let report = '# Relatório de Análise\n\n';
+    report += `Sentenças: ${document.getElementById('sentences').textContent}\n`;
+    report += `Palavras: ${document.getElementById('words').textContent}\n`;
+    report += `Caracteres: ${document.getElementById('characters').textContent}\n`;
+    report += `Avisos: ${document.getElementById('warnings').textContent}\n\n`;
+
+    report += '## Índices de Leitura\n';
+    if (Array.isArray(lastReadabilityMetrics)) {
+        lastReadabilityMetrics.forEach(m => {
+            report += `- **${m.label}**: ${m.value}\n`;
+        });
+    }
+
+    report += '\n## Avisos\n';
+    for (const label in lastRuleCounts) {
+        const count = lastRuleCounts[label];
+        if (count > 0) {
+            const summaryText = count === 1 ? rules[label].summarySingle : rules[label].summary;
+            report += `- ${summaryText}: ${count}\n`;
+        }
+    }
+    return report;
+}
+
+// Faz o download do relatório em Markdown
+document.getElementById('download-report').addEventListener('click', function () {
+    const reportContent = generateReport();
+    const blob = new Blob([reportContent], { type: 'text/markdown;charset=utf-8' });
+    const filename = 'relatorio.md';
+
+    if (window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveBlob(blob, filename);
+    } else {
+        const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
         link.download = filename;
         document.body.appendChild(link);
