@@ -1,12 +1,36 @@
 /* Modernized General Styles */
+:root {
+    --bg-start: #f8fafc;
+    --bg-end: #e9ecef;
+    --text-color: #23272f;
+    --panel-bg: #fff;
+    --panel-muted: #f6f8fa;
+    --border-color: #e3e7ed;
+    --button-bg: #63666b;
+    --button-text: #fff;
+    --button-bg-hover: #1a325f;
+}
+
+body.dark-theme {
+    --bg-start: #1e1e1e;
+    --bg-end: #2b2b2b;
+    --text-color: #f1f1f1;
+    --panel-bg: #333;
+    --panel-muted: #383838;
+    --border-color: #555;
+    --button-bg: #555;
+    --button-text: #fff;
+    --button-bg-hover: #222;
+}
+
 body {
     font-family: 'Inter', 'Roboto', Arial, sans-serif;
     margin: 0;
     padding: 0;
     height: 100vh;
     overflow: hidden;
-    background: linear-gradient(120deg, #f8fafc 0%, #e9ecef 100%);
-    color: #23272f;
+    background: linear-gradient(120deg, var(--bg-start) 0%, var(--bg-end) 100%);
+    color: var(--text-color);
     letter-spacing: 0.01em;
 }
 
@@ -22,7 +46,7 @@ body {
 /* Editor Styles */
 #editor-container {
     width: 50%;
-    background: #fff;
+    background: var(--panel-bg);
     border-radius: 16px;
     box-shadow: 0 2px 16px 0 rgba(60,72,88,0.07);
     margin-right: 0;
@@ -40,7 +64,7 @@ body {
 #editor {
     flex: 1;
     width: 100%;
-    background: #f6f8fa;
+    background: var(--panel-muted);
     padding: 24px;
     border: none;
     outline: none;
@@ -56,7 +80,7 @@ body {
     width: 50%;
     display: flex;
     flex-direction: row;
-    background: #fff;
+    background: var(--panel-bg);
     border-radius: 16px;
     box-shadow: 0 2px 16px 0 rgba(60,72,88,0.07);
     overflow: hidden;
@@ -68,8 +92,8 @@ body {
     width: 70%;
     padding: 24px;
     overflow-y: auto;
-    background: #f8fafc;
-    border-right: 1px solid #e3e7ed;
+    background: var(--panel-muted);
+    border-right: 1px solid var(--border-color);
     box-sizing: border-box;
 }
 
@@ -77,14 +101,14 @@ body {
     width: 30%;
     padding: 24px;
     overflow-y: auto;
-    background: #fff;
+    background: var(--panel-bg);
     box-sizing: border-box;
 }
 
 #sidebar h3 {
     margin-top: 0;
     font-weight: 600;
-    color: #23272f;
+    color: var(--text-color);
     letter-spacing: 0.02em;
 }
 
@@ -93,7 +117,7 @@ body {
     margin-top: 1.2em;
     margin-bottom: 0.6em;
     font-weight: 600;
-    color: #23272f;
+    color: var(--text-color);
 }
 
 #mdview p {
@@ -112,7 +136,7 @@ body {
 }
 
 #mdview code {
-    background: #e3e7ed;
+    background: var(--border-color);
     padding: 3px 7px;
     border-radius: 6px;
     font-family: 'JetBrains Mono', 'Fira Mono', 'Courier New', monospace;
@@ -126,7 +150,7 @@ body {
     margin-bottom: 1.2em;
     border-collapse: separate;
     border-spacing: 0;
-    background: #fff;
+    background: var(--panel-bg);
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 1px 4px 0 rgba(60,72,88,0.04);
@@ -135,14 +159,14 @@ body {
 #mdview th,
 #mdview td {
     padding: 14px 18px;
-    border-bottom: 1px solid #e3e7ed;
+    border-bottom: 1px solid var(--border-color);
     text-align: left;
 }
 
 #mdview th {
-    background: #f6f8fa;
+    background: var(--panel-muted);
     font-weight: 600;
-    color: #23272f;
+    color: var(--text-color);
 }
 
 #mdview tr:last-child td {
@@ -153,7 +177,7 @@ body {
 #warnings-panel, .warnings-panel {
     margin-bottom: 24px;
     padding: 16px 18px 12px 18px;
-    background: #f6f8fa;
+    background: var(--panel-muted);
     border-radius: 10px;
     box-shadow: 0 1px 4px 0 rgba(60,72,88,0.04);
 }
@@ -162,7 +186,7 @@ body {
     margin-top: 0;
     margin-bottom: 12px;
     font-size: 1.13em;
-    color: #23272f;
+    color: var(--text-color);
     font-weight: 700;
     letter-spacing: 0.01em;
 }
@@ -178,7 +202,7 @@ body {
     margin-bottom: 8px;
     padding: 7px 12px;
     border-radius: 7px;
-    background: #fff;
+    background: var(--panel-bg);
     font-size: 1em;
     color: #2d3a4a;
     box-shadow: 0 1px 2px 0 rgba(60,72,88,0.03);
@@ -225,8 +249,8 @@ body {
 /* Statistics Panel */
 #statistics {
     padding: 12px 28px;
-    background: #fff;
-    border-top: 1px solid #e3e7ed;
+    background: var(--panel-bg);
+    border-top: 1px solid var(--border-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -260,8 +284,8 @@ body {
 }
 
 #file-actions button {
-    background: #63666b;
-    color: #fff;
+    background: var(--button-bg);
+    color: var(--button-text);
     border: none;
     border-radius: 8px;
     padding: 8px 18px;
@@ -273,8 +297,8 @@ body {
 }
 
 #file-actions button:hover, #file-actions button:focus {
-    background: #1a325f;
-    color: #fff;
+    background: var(--button-bg-hover);
+    color: var(--button-text);
     box-shadow: 0 2px 8px 0 rgba(60,72,88,0.13);
     outline: none;
 }
@@ -327,7 +351,7 @@ body {
     #mdview {
         width: 100%;
         border-right: none;
-        border-bottom: 1px solid #e3e7ed;
+        border-bottom: 1px solid var(--border-color);
     }
 
     #sidebar {
@@ -368,7 +392,7 @@ body {
 .metrics-panel {
     margin-bottom: 24px;
     padding: 16px 18px 12px 18px;
-    background: #f6f8fa;
+    background: var(--panel-muted);
     border-radius: 10px;
     box-shadow: 0 1px 4px 0 rgba(60,72,88,0.04);
 }
@@ -377,7 +401,7 @@ body {
     margin-top: 0;
     margin-bottom: 12px;
     font-size: 1.13em;
-    color: #23272f;
+    color: var(--text-color);
     font-weight: 700;
     letter-spacing: 0.01em;
 }

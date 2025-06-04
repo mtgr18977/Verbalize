@@ -316,3 +316,51 @@ if (langSelector) {
         loadRules(e.target.value).then(updateView);
     });
 }
+
+// ====== Theme Handling ======
+function setTheme(theme) {
+    document.body.classList.toggle('dark-theme', theme === 'dark');
+    editor.setTheme(theme === 'dark' ? 'ace/theme/custom_dark' : 'ace/theme/chrome');
+    localStorage.setItem('verbalize-theme', theme);
+    updateView();
+}
+
+var themeSelector = document.getElementById('theme-selector');
+if (themeSelector) {
+    var saved = localStorage.getItem('verbalize-theme') || 'light';
+    themeSelector.value = saved;
+    setTheme(saved);
+    themeSelector.addEventListener('change', function (e) {
+        setTheme(e.target.value);
+    });
+}
+
+// ====== Keyboard Shortcuts ======
+function wrapSelection(wrapper) {
+    var range = editor.getSelectionRange();
+    var value = editor.session.getTextRange(range);
+    editor.session.replace(range, wrapper + value + wrapper);
+}
+
+editor.commands.addCommand({
+    name: 'bold',
+    bindKey: {win: 'Ctrl-B', mac: 'Command-B'},
+    exec: function(){ wrapSelection('**'); }
+});
+
+editor.commands.addCommand({
+    name: 'italic',
+    bindKey: {win: 'Ctrl-I', mac: 'Command-I'},
+    exec: function(){ wrapSelection('*'); }
+});
+
+editor.commands.addCommand({
+    name: 'toggleTheme',
+    bindKey: {win: 'Ctrl-D', mac: 'Command-D'},
+    exec: function(){
+        var current = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
+        var next = current === 'dark' ? 'light' : 'dark';
+        if(themeSelector) themeSelector.value = next;
+        setTheme(next);
+    }
+});
