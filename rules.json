@@ -1,75 +1,227 @@
 {
+  "pt-br": {
     "fraseLonga": {
-        "regex": "([^\\\\.\\/?!]+[\\\\.\\/!?]+)",
-        "message": "Esta frase é muito longa. Considere dividir em sentenças menores.",
-        "color": "#f4cccc",
-        "summary": " frases longas detectadas.",
-        "summarySingle": " frase longa detectada.",
-        "suggestion": "Divida a frase em sentenças menores para facilitar a leitura.",
-        "condition": "const wordCount = match.trim().split(/\\s+/).length; return wordCount > 20;"
+      "regex": "([^\\.\\/?!]+[\\.\\/!?]+)",
+      "message": "Esta frase é muito longa. Considere dividir em sentenças menores.",
+      "color": "#f4cccc",
+      "summary": " frases longas detectadas.",
+      "summarySingle": " frase longa detectada.",
+      "suggestion": "Divida a frase em sentenças menores para facilitar a leitura.",
+      "condition": "const wordCount = match.trim().split(/\\s+/).length; return wordCount > 20;"
     },
     "palavraComplexa": {
-        "regex": "\\b\\w{13,}\\b",
-        "message": "Considere usar palavras mais curtas para melhorar a legibilidade.",
-        "color": "#d9ead3",
-        "summary": " palavras complexas detectadas.",
-        "summarySingle": " palavra complexa detectada.",
-        "suggestion": "Prefira palavras mais curtas e simples para facilitar a compreensão."
+      "regex": "\\b\\w{13,}\\b",
+      "message": "Considere usar palavras mais curtas para melhorar a legibilidade.",
+      "color": "#d9ead3",
+      "summary": " palavras complexas detectadas.",
+      "summarySingle": " palavra complexa detectada.",
+      "suggestion": "Prefira palavras mais curtas e simples para facilitar a compreensão."
     },
     "vozPassiva": {
-        "regex": "\\b(foi|foram|será|serão|é|são|era|eram|seja|sejam|fosse|fossem)\\s+(?:\\w+\\s*)*(ado|ido|ada|ida|ados|idos|adas|idas)\\b",
-        "message": "Voz passiva detectada. Considere usar a voz ativa.",
-        "color": "#fff2cc",
-        "summary": " utilizações de voz passiva.",
-        "summarySingle": " utilização de voz passiva.",
-        "suggestion": "Prefira a voz ativa para tornar o texto mais direto e claro."
+      "regex": "\\b(foi|foram|será|serão|é|são|era|eram|seja|sejam|fosse|fossem)\\s+(?:\\w+\\s*)*(ado|ido|ada|ida|ados|idos|adas|idas)\\b",
+      "message": "Voz passiva detectada. Considere usar a voz ativa.",
+      "color": "#fff2cc",
+      "summary": " utilizações de voz passiva.",
+      "summarySingle": " utilização de voz passiva.",
+      "suggestion": "Prefira a voz ativa para tornar o texto mais direto e claro."
     },
     "adverbioExcessivo": {
-        "regex": "\\b\\w+mente\\b",
-        "message": "Uso de advérbio em excesso. Verifique se é necessário.",
-        "color": "#d0e0e3",
-        "summary": " advérbios detectados.",
-        "summarySingle": " advérbio detectado.",
-        "suggestion": "Remova advérbios desnecessários para deixar o texto mais objetivo e conciso."
+      "regex": "\\b\\w+mente\\b",
+      "message": "Uso de advérbio em excesso. Verifique se é necessário.",
+      "color": "#d0e0e3",
+      "summary": " advérbios detectados.",
+      "summarySingle": " advérbio detectado.",
+      "suggestion": "Remova advérbios desnecessários para deixar o texto mais objetivo e conciso."
     },
     "cliches": {
-        "regex": "\\b(a nível de|literalmente|sustentabilidade|paradigma|proativo|sinergia|agregar valor|pensar fora da caixa|no final do dia|mais do que nunca)\\b",
-        "message": "Evite clichês e expressões muito usadas.",
-        "color": "#fce5cd",
-        "summary": " clichês detectados.",
-        "summarySingle": " clichê detectado.",
-        "suggestion": "Substitua clichês por linguagem mais original e específica para o contexto."
+      "regex": "\\b(a nível de|literalmente|sustentabilidade|paradigma|proativo|sinergia|agregar valor|pensar fora da caixa|no final do dia|mais do que nunca)\\b",
+      "message": "Evite clichês e expressões muito usadas.",
+      "color": "#fce5cd",
+      "summary": " clichês detectados.",
+      "summarySingle": " clichê detectado.",
+      "suggestion": "Substitua clichês por linguagem mais original e específica para o contexto."
     },
     "jargao": {
-        "regex": "\\b(alavancar|stakeholders|empowerment|benchmarking|downsizing|feedback|brainstorming|core business)\\b",
-        "message": "Termo técnico detectado. Considere usar linguagem mais simples.",
-        "color": "#ead1dc",
-        "summary": " jargões detectados.",
-        "summarySingle": " jargão detectado.",
-        "suggestion": "Use termos mais comuns e evite jargões técnicos, a menos que o público-alvo seja especializado."
+      "regex": "\\b(alavancar|stakeholders|empowerment|benchmarking|downsizing|feedback|brainstorming|core business)\\b",
+      "message": "Termo técnico detectado. Considere usar linguagem mais simples.",
+      "color": "#ead1dc",
+      "summary": " jargões detectados.",
+      "summarySingle": " jargão detectado.",
+      "suggestion": "Use termos mais comuns e evite jargões técnicos, a menos que o público-alvo seja especializado."
     },
     "transicaoExcessiva": {
-        "regex": "\\b(portanto|além disso|contudo|no entanto|assim|consequentemente|desse modo|por conseguinte|em suma)\\b",
-        "message": "Uso excessivo de palavras de transição pode afetar a fluidez do texto.",
-        "color": "#c9daf8",
-        "summary": " palavras de transição em excesso.",
-        "summarySingle": " palavra de transição em excesso.",
-        "suggestion": "Use palavras de transição com moderação para manter a fluidez e evitar redundância."
+      "regex": "\\b(portanto|além disso|contudo|no entanto|assim|consequentemente|desse modo|por conseguinte|em suma)\\b",
+      "message": "Uso excessivo de palavras de transição pode afetar a fluidez do texto.",
+      "color": "#c9daf8",
+      "summary": " palavras de transição em excesso.",
+      "summarySingle": " palavra de transição em excesso.",
+      "suggestion": "Use palavras de transição com moderação para manter a fluidez e evitar redundância."
     },
     "negacaoDupla": {
-        "regex": "\\b(não\\s+.*\\bnão\\b|nunca\\s+.*\\bnão\\b|nunca\\s+.*\\bnunca\\b)\\b",
-        "message": "Dupla negativa detectada. Isso pode confundir o leitor.",
-        "color": "#e6b8af",
-        "summary": " negativas duplas detectadas.",
-        "summarySingle": " negativa dupla detectada.",
-        "suggestion": "Reformule a frase para evitar a dupla negativa e tornar a mensagem mais clara e direta."
+      "regex": "\\b(não\\s+.*\\bnão\\b|nunca\\s+.*\\bnão\\b|nunca\\s+.*\\bnunca\\b)\\b",
+      "message": "Dupla negativa detectada. Isso pode confundir o leitor.",
+      "color": "#e6b8af",
+      "summary": " negativas duplas detectadas.",
+      "summarySingle": " negativa dupla detectada.",
+      "suggestion": "Reformule a frase para evitar a dupla negativa e tornar a mensagem mais clara e direta."
     },
     "palavrasRepetidas": {
-        "regex": "\\b(\\w+)\\b\\s+\\b\\1\\b",
-        "message": "Evite repetir a mesma palavra consecutivamente.",
-        "color": "#b6d7a8",
-        "summary": " repetições de palavras.",
-        "summarySingle": " repetição de palavra.",
-        "suggestion": "Substitua a palavra repetida por um sinônimo ou reestruture a frase para evitar a repetição imediata."
+      "regex": "\\b(\\w+)\\b\\s+\\b\\1\\b",
+      "message": "Evite repetir a mesma palavra consecutivamente.",
+      "color": "#b6d7a8",
+      "summary": " repetições de palavras.",
+      "summarySingle": " repetição de palavra.",
+      "suggestion": "Substitua a palavra repetida por um sinônimo ou reestruture a frase para evitar a repetição imediata."
     }
+  },
+  "en": {
+    "fraseLonga": {
+      "regex": "([^\\.\\/?!]+[\\.\\/!?]+)",
+      "message": "This sentence is too long. Consider splitting it into shorter ones.",
+      "color": "#f4cccc",
+      "summary": " long sentences detected.",
+      "summarySingle": " long sentence detected.",
+      "suggestion": "Break the sentence into smaller parts to improve readability.",
+      "condition": "const wordCount = match.trim().split(/\\s+/).length; return wordCount > 20;"
+    },
+    "palavraComplexa": {
+      "regex": "\\b\\w{13,}\\b",
+      "message": "Consider using shorter words for better readability.",
+      "color": "#d9ead3",
+      "summary": " complex words detected.",
+      "summarySingle": " complex word detected.",
+      "suggestion": "Prefer shorter and simpler words to make the text easier to read."
+    },
+    "vozPassiva": {
+      "regex": "\\b(be|is|am|are|was|were|been|being)\\s+(?:\\w+\\s*)*(ed|en)\\b",
+      "message": "Passive voice detected. Consider using active voice.",
+      "color": "#fff2cc",
+      "summary": " uses of passive voice.",
+      "summarySingle": " use of passive voice.",
+      "suggestion": "Use active voice to make the text clearer and more direct."
+    },
+    "adverbioExcessivo": {
+      "regex": "\\b\\w+ly\\b",
+      "message": "Adverb overuse detected. Check if it is really necessary.",
+      "color": "#d0e0e3",
+      "summary": " adverbs detected.",
+      "summarySingle": " adverb detected.",
+      "suggestion": "Remove unnecessary adverbs to keep the text concise."
+    },
+    "cliches": {
+      "regex": "\\b(at the end of the day|literally|sustainability|paradigm|proactive|synergy|add value|think outside the box|more than ever)\\b",
+      "message": "Avoid clichés and overused expressions.",
+      "color": "#fce5cd",
+      "summary": " clichés detected.",
+      "summarySingle": " cliché detected.",
+      "suggestion": "Replace clichés with more original wording."
+    },
+    "jargao": {
+      "regex": "\\b(leverage|stakeholders|empowerment|benchmarking|downsizing|feedback|brainstorming|core business)\\b",
+      "message": "Technical jargon detected. Consider simpler language.",
+      "color": "#ead1dc",
+      "summary": " jargon terms detected.",
+      "summarySingle": " jargon term detected.",
+      "suggestion": "Use more common terms unless writing for a specialized audience."
+    },
+    "transicaoExcessiva": {
+      "regex": "\\b(therefore|however|moreover|nevertheless|thus|consequently|in summary)\\b",
+      "message": "Excessive use of transition words may hurt flow.",
+      "color": "#c9daf8",
+      "summary": " transition words overused.",
+      "summarySingle": " transition word overused.",
+      "suggestion": "Use transition words sparingly to maintain a smooth reading experience."
+    },
+    "negacaoDupla": {
+      "regex": "\\b(no\\s+.*\\bno\\b|never\\s+.*\\bno\\b|never\\s+.*\\bnever\\b)\\b",
+      "message": "Double negative detected. This can confuse readers.",
+      "color": "#e6b8af",
+      "summary": " double negatives detected.",
+      "summarySingle": " double negative detected.",
+      "suggestion": "Rewrite the sentence to avoid double negatives."
+    },
+    "palavrasRepetidas": {
+      "regex": "\\b(\\w+)\\b\\s+\\b\\1\\b",
+      "message": "Avoid repeating the same word consecutively.",
+      "color": "#b6d7a8",
+      "summary": " word repetitions.",
+      "summarySingle": " word repetition.",
+      "suggestion": "Replace the repeated word with a synonym or restructure the sentence."    
+    }
+  },
+  "es": {
+    "fraseLonga": {
+      "regex": "([^\\.\\/?!]+[\\.\\/!?]+)",
+      "message": "Esta oración es muy larga. Considera dividirla en frases más cortas.",
+      "color": "#f4cccc",
+      "summary": " oraciones largas detectadas.",
+      "summarySingle": " oración larga detectada.",
+      "suggestion": "Divide la oración para mejorar la legibilidad.",
+      "condition": "const wordCount = match.trim().split(/\\s+/).length; return wordCount > 20;"
+    },
+    "palavraComplexa": {
+      "regex": "\\b\\w{13,}\\b",
+      "message": "Considera usar palabras más cortas para mejorar la lectura.",
+      "color": "#d9ead3",
+      "summary": " palabras complejas detectadas.",
+      "summarySingle": " palabra compleja detectada.",
+      "suggestion": "Prefiere palabras más simples para facilitar la comprensión."
+    },
+    "vozPassiva": {
+      "regex": "\\b(fue|fueron|será|serán|es|son|era|eran|sea|sean|fuese|fuesen)\\s+(?:\\w+\\s*)*(ado|ido|ada|ida|ados|idos|adas|idas)\\b",
+      "message": "Voz pasiva detectada. Considera usar la voz activa.",
+      "color": "#fff2cc",
+      "summary": " usos de voz pasiva.",
+      "summarySingle": " uso de voz pasiva.",
+      "suggestion": "Usa la voz activa para un texto más claro y directo."
+    },
+    "adverbioExcessivo": {
+      "regex": "\\b\\w+mente\\b",
+      "message": "Se detectó uso excesivo de adverbios. Verifica si son necesarios.",
+      "color": "#d0e0e3",
+      "summary": " adverbios detectados.",
+      "summarySingle": " adverbio detectado.",
+      "suggestion": "Elimina adverbios innecesarios para mantener la concisión."
+    },
+    "cliches": {
+      "regex": "\\b(a nivel de|literalmente|sostenibilidad|paradigma|proactivo|sinergia|aportar valor|pensar fuera de la caja|al final del día|más que nunca)\\b",
+      "message": "Evita los clichés y expresiones muy usadas.",
+      "color": "#fce5cd",
+      "summary": " clichés detectados.",
+      "summarySingle": " cliché detectado.",
+      "suggestion": "Reemplaza los clichés con un lenguaje más original."
+    },
+    "jargao": {
+      "regex": "\\b(alinear|stakeholders|empowerment|benchmarking|downsizing|feedback|brainstorming|core business)\\b",
+      "message": "Jerga técnica detectada. Usa un lenguaje más simple.",
+      "color": "#ead1dc",
+      "summary": " jerga detectada.",
+      "summarySingle": " término de jerga detectado.",
+      "suggestion": "Usa términos más comunes a menos que tu audiencia sea especializada."
+    },
+    "transicaoExcessiva": {
+      "regex": "\\b(por lo tanto|además|sin embargo|no obstante|así|en consecuencia|de ese modo|por ende|en resumen)\\b",
+      "message": "El uso excesivo de palabras de transición puede afectar la fluidez.",
+      "color": "#c9daf8",
+      "summary": " palabras de transición en exceso.",
+      "summarySingle": " palabra de transición en exceso.",
+      "suggestion": "Emplea palabras de transición con moderación para mantener la fluidez."
+    },
+    "negacaoDupla": {
+      "regex": "\\b(no\\s+.*\\bno\\b|nunca\\s+.*\\bno\\b|nunca\\s+.*\\bnunca\\b)\\b",
+      "message": "Doble negación detectada. Puede confundir al lector.",
+      "color": "#e6b8af",
+      "summary": " dobles negaciones detectadas.",
+      "summarySingle": " doble negación detectada.",
+      "suggestion": "Reformula la frase para evitar la doble negación."
+    },
+    "palavrasRepetidas": {
+      "regex": "\\b(\\w+)\\b\\s+\\b\\1\\b",
+      "message": "Evita repetir la misma palabra de forma consecutiva.",
+      "color": "#b6d7a8",
+      "summary": " repeticiones de palabras.",
+      "summarySingle": " repetición de palabra.",
+      "suggestion": "Sustituye la palabra repetida o reestructura la frase para evitar la repetición inmediata."
+    }
+  }
 }

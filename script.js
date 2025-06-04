@@ -39,15 +39,17 @@ function countSentences(str) {
     return matches ? matches.length : 0;
 }
 
-// Variável para armazenar as regras, será carregada do JSON
-let rulesPtBr = {}; // Definindo como let para permitir reatribuição
+// Variável para armazenar as regras de acordo com o idioma selecionado
+let rules = {};
+let currentLanguage = 'pt-br';
 
 // Obtenha a chave da API da Maritaca do processo principal
 // Verifique se estamos no ambiente Electron antes de tentar importar ipcRenderer
 
 
-// NOVO: Função para carregar as regras do JSON
-async function loadRules() {
+// NOVO: Função para carregar as regras do JSON de acordo com o idioma
+async function loadRules(lang = currentLanguage) {
+    currentLanguage = lang;
     try {
         const response = await fetch('rules.json');
         if (!response.ok) {
@@ -55,26 +57,24 @@ async function loadRules() {
         }
         const jsonRules = await response.json();
 
-        // Processar as regras do JSON
-        for (const key in jsonRules) {
-            if (jsonRules.hasOwnProperty(key)) {
-                const rule = jsonRules[key];
-                // Converte a string regex para um objeto RegExp
-                rule.regex = new RegExp(rule.regex, 'gi'); // Assume 'gi' para todas as regras
-                // Se houver uma condição, avalie a string para transformá-la em função
+        const selected = jsonRules[lang] || {};
+        rules = {};
+
+        for (const key in selected) {
+            if (selected.hasOwnProperty(key)) {
+                const rule = selected[key];
+                rule.regex = new RegExp(rule.regex, 'gi');
                 if (rule.condition && typeof rule.condition === 'string') {
-                    // Cuidado: eval pode ser perigoso se o JSON vier de fonte não confiável.
-                    // Para um app desktop local, o risco é menor.
                     rule.condition = new Function('match', rule.condition);
                 }
-                rulesPtBr[key] = rule;
+                rules[key] = rule;
             }
         }
-        console.log("Regras carregadas com sucesso:", rulesPtBr);
+        console.log('Regras carregadas com sucesso para', lang, rules);
     } catch (error) {
         console.error("Falha ao carregar ou processar as regras:", error);
-        // Fallback para regras vazias ou padrão se o carregamento falhar
-        rulesPtBr = {};
+        // Fallback para regras vazias se o carregamento falhar
+        rules = {};
     }
 }
 
@@ -87,7 +87,7 @@ function updateView() {
     var doc = parser.parseFromString(mdContent, 'text/html');
 
     var ruleReplacements = {};
-    for (var label in rulesPtBr) { // rulesPtBr agora é preenchido pelo JSON
+    for (var label in rules) {
         ruleReplacements[label] = 0;
     }
 
@@ -99,8 +99,8 @@ function updateView() {
         var hasMatch = false;
         var newContent = document.createDocumentFragment();
 
-        for (var label in rulesPtBr) {
-            var rule = rulesPtBr[label];
+        for (var label in rules) {
+            var rule = rules[label];
             // Use a regex já criada a partir do JSON
             var regex = rule.regex;
             regex.lastIndex = 0; // Resetar para cada nova busca no textContent
@@ -166,11 +166,11 @@ function updateView() {
 
     // Atualiza o resumo das regras aplicadas
     var rulesSummary = "";
-    for (var label in rulesPtBr) {
+    for (var label in rules) {
         var count = ruleReplacements[label];
-        var summaryText = count === 1 ? rulesPtBr[label].summarySingle : rulesPtBr[label].summary;
+        var summaryText = count === 1 ? rules[label].summarySingle : rules[label].summary;
         if (count > 0) {
-            rulesSummary += `<div class="warning-badge" style="background: ${rulesPtBr[label].color};">
+            rulesSummary += `<div class="warning-badge" style="background: ${rules[label].color};">
                                 <span class="badge bg-secondary">${count}</span>
                                 ${summaryText}
                              </div>`;
@@ -221,7 +221,10 @@ function updateReadabilityMetrics(text) {
         { label: "Flesch BR", value: textstat.flesch_reading_ease_ptbr(text).toFixed(1), type: "flesch" },
         { label: "SMOG", value: textstat.smog_index(text).toFixed(1) },
         { label: "Coleman-Liau", value: textstat.coleman_liau_index(text).toFixed(1) },
-        { label: "Gunning Fog", value: textstat.gunning_fog(text).toFixed(1) }
+        { label: "Gunning Fog", value: textstat.gunning_fog(text).toFixed(1) },
+        { label: "Automated Readability", value: textstat.automated_readability_index(text).toFixed(1) },
+        { label: "Dale-Chall", value: textstat.dale_chall_readability_score(text).toFixed(1) },
+        { label: "Linsear Write", value: textstat.linsear_write_formula(text).toFixed(1) }
     ];
     const ul = document.getElementById('metrics-list');
     ul.innerHTML = '';
@@ -241,6 +244,18 @@ function updateReadabilityMetrics(text) {
         }
 
         li.appendChild(span);
+
+        if (m.type === 'flesch') {
+            const bar = document.createElement('div');
+            bar.className = 'metric-bar';
+            const inner = document.createElement('div');
+            inner.className = 'metric-bar-inner';
+            const width = Math.max(0, Math.min(100, parseFloat(m.value)));
+            inner.style.width = width + '%';
+            bar.appendChild(inner);
+            li.appendChild(bar);
+        }
+
         ul.appendChild(li);
     });
 }
@@ -293,3 +308,11 @@ document.getElementById('download-button').addEventListener('click', function ()
         document.body.removeChild(link);
     }
 });
+
+// Alteração de idioma via seletor
+var langSelector = document.getElementById('language-selector');
+if (langSelector) {
+    langSelector.addEventListener('change', function (e) {
+        loadRules(e.target.value).then(updateView);
+    });
+}
