@@ -13,7 +13,7 @@ Verbalize is an advanced Markdown editor with grammatical and stylistic analysis
 - **Minimalist Interface**: A clean, writing-focused design with a responsive layout adaptable to different screen sizes.
 - **Desktop Application**: Available as a cross-platform desktop app using Electron.
 - **More Readability Metrics**: Extra formulas and progress bars to visualize Flesch scores.
-- **Theme Selection and Shortcuts**: Choose between light and dark modes and use handy keyboard shortcuts.
+- **Theme Selection and Shortcuts**: Use the toolbar selector or `Ctrl-D` to switch between light and dark modes.
 
 ## Screenshots
 
