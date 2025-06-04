@@ -1,6 +1,21 @@
 // Inicialização do editor Ace
 var editor = ace.edit("editor");
-editor.setTheme("ace/theme/chrome");
+
+function setTheme(theme) {
+    if (theme === 'dark') {
+        document.body.classList.add('dark-theme');
+        editor.setTheme('ace/theme/monokai');
+    } else {
+        document.body.classList.remove('dark-theme');
+        editor.setTheme('ace/theme/chrome');
+    }
+    localStorage.setItem('editor-theme', theme);
+    var selector = document.getElementById('theme-selector');
+    if (selector) selector.value = theme;
+}
+
+var savedTheme = localStorage.getItem('editor-theme') || 'light';
+setTheme(savedTheme);
 editor.session.setMode("ace/mode/markdown");
 editor.setOptions({
     fontSize: "14px",
@@ -316,3 +331,21 @@ if (langSelector) {
         loadRules(e.target.value).then(updateView);
     });
 }
+
+var themeSelector = document.getElementById('theme-selector');
+if (themeSelector) {
+    themeSelector.addEventListener('change', function (e) {
+        setTheme(e.target.value);
+    });
+}
+
+// Keyboard shortcuts for upload (Ctrl+O) and download (Ctrl+S)
+document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+        e.preventDefault();
+        document.getElementById('download-button').click();
+    } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'o') {
+        e.preventDefault();
+        document.getElementById('file-input').click();
+    }
+});

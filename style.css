@@ -419,3 +419,40 @@ body {
     background: #467fcf;
     border-radius: 3px;
 }
+
+/* Dark Theme Overrides */
+body.dark-theme {
+    background: #1e1e1e;
+    color: #f1f1f1;
+}
+body.dark-theme #editor-container,
+body.dark-theme #viewer-container,
+body.dark-theme #statistics {
+    background: #2b2b2b;
+    box-shadow: none;
+    border-color: #555;
+}
+body.dark-theme #editor {
+    background: #3b3b3b;
+    color: #f1f1f1;
+}
+body.dark-theme #mdview,
+body.dark-theme #sidebar {
+    background: #2b2b2b;
+    color: #f1f1f1;
+    border-color: #555;
+}
+body.dark-theme .warning-badge {
+    background: #444;
+    color: #f1f1f1;
+}
+body.dark-theme .metrics-panel {
+    background: #3b3b3b;
+}
+body.dark-theme .metrics-panel h3,
+body.dark-theme #sidebar h3 {
+    color: #f1f1f1;
+}
+body.dark-theme #metrics-list li {
+    color: #f1f1f1;
+}
