@@ -1,5 +1,5 @@
 # Verbalize
-Verbalize is an advanced Markdown editor with grammatical and stylistic analysis for Brazilian Portuguese. Designed to help writers, students, and professionals improve the clarity and readability of their texts, Verbalize provides an intuitive interface for enhancing writing.
+Verbalize is an advanced Markdown editor with grammatical and stylistic analysis. Initially built for Brazilian Portuguese, it now includes rule sets for English and Spanish as well. Designed to help writers, students, and professionals improve the clarity and readability of their texts, Verbalize provides an intuitive interface for enhancing writing.
 
 ***
 
@@ -7,10 +7,12 @@ Verbalize is an advanced Markdown editor with grammatical and stylistic analysis
 
 - **Real-Time Markdown Editor**: Write in Markdown and preview your content instantly.
 - **Grammatical and Stylistic Analysis**: Receive feedback on text readability, including long sentences, passive voice, overused adverbs, clichés, jargon, and more.
+- **Multilingual Support**: Rules available for Portuguese, English and Spanish.
 - **Syntax Highlighting**: Automatically highlights inserted code for better readability.
 - **Import and Export Files**: Import `.md`, `.markdown`, and `.txt` files, and export your work in Markdown format.
 - **Minimalist Interface**: A clean, writing-focused design with a responsive layout adaptable to different screen sizes.
 - **Desktop Application**: Available as a cross-platform desktop app using Electron.
+- **More Readability Metrics**: Extra formulas and progress bars to visualize Flesch scores.
 
 ## Screenshots
 

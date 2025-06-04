@@ -36,6 +36,17 @@ const textstat = {
         // Fórmula Flesch Brasileiro conforme o PDF [cite: 33]
         return 248.835 - (1.015 * ASL) - (84.6 * ASW);
     },
+    // Índice Flesch para Espanhol (usa fórmula do inglês com contagem genérica)
+    flesch_reading_ease_es: function(text) {
+        const words = text.split(/\s+/).length;
+        const sentences = text.split(/[.!?]/).filter(Boolean).length;
+        const syllables = text.split(/\s+/).reduce((acc, word) => acc + countSyllables(word), 0);
+
+        const ASL = sentences === 0 ? 0 : words / sentences;
+        const ASW = words === 0 ? 0 : syllables / words;
+
+        return 206.835 - (1.015 * ASL) - (84.6 * ASW);
+    },
     smog_index: function(text) {
         const words = text.split(/\s+/).length; // Não usado na fórmula SMOG, mas útil para validação
         const sentences = text.split(/[.!?]/).filter(Boolean).length;
@@ -115,6 +126,8 @@ const textstat = {
             // mas podemos mapeá-lo para um nível de ensino brasileiro com base na tabela do PDF[cite: 34].
             // Para manter a consistência com o nome da função (text_standard), vamos retornar a classificação de ensino.
             return interpretFleschReadingEasePtBr(this.flesch_reading_ease_ptbr(text))[0];
+        } else if (lang === 'es') {
+            flesch_kincaid_grade_score = this.flesch_kincaid_grade(text);
         } else {
             flesch_kincaid_grade_score = this.flesch_kincaid_grade(text);
         }
