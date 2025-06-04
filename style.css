@@ -252,7 +252,7 @@ body {
     background: var(--panel-bg);
     border-top: 1px solid var(--border-color);
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     height: 56px;
     box-sizing: border-box;
