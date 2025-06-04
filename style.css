@@ -37,7 +37,7 @@ body {
 /* Main Container */
 #main-container {
     display: flex;
-    height: calc(100vh - 56px);
+    height: calc(100vh - 112px);
     padding: 18px;
     gap: 18px;
     box-sizing: border-box;
@@ -231,6 +231,21 @@ body {
     color: #e74c3c !important;
 }
 
+/* Top Toolbar */
+#toolbar {
+    padding: 12px 28px;
+    background: #fff;
+    border-bottom: 1px solid #e3e7ed;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 56px;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 1px 8px 0 rgba(60,72,88,0.04);
+}
+
 /* Statistics Panel */
 #statistics {
     padding: 12px 28px;
@@ -351,6 +366,14 @@ body {
         height: auto;
         padding: 12px;
         border-radius: 0 0 12px 12px;
+    }
+
+    #toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding: 12px;
+        border-radius: 12px 12px 0 0;
     }
 
     #stats-info {

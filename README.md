@@ -60,9 +60,10 @@ Verbalize is an advanced Markdown editor with grammatical and stylistic analysis
 - The app analyzes your text and highlights areas for improvement.
 - Hover over the highlighted sections to see suggestions.
 
-### Use the Upload and Download Buttons:
+### Use the Top Toolbar:
 - **Upload**: Load `.md` or `.txt` files to continue editing.
 - **Download**: Download the current editor content as a Markdown (`.md`) file.
+- **Language Selector**: Switch the analysis rules between Portuguese, English, and Spanish.
 
 ### View Statistics:
 - The bottom bar displays the number of sentences, words, characters, and warnings in the text.
@@ -181,9 +182,10 @@ Verbalize é um editor Markdown avançado com análise gramatical e estilística
 - O aplicativo analisa seu texto e destaca áreas para melhoria.
 - Passe o mouse sobre as seções destacadas para ver as sugestões.
 
-### Utilize os Botões de Upload e Download:
+### Utilize a Barra Superior:
 - **Upload**: Carregue arquivos `.md` ou `.txt` para continuar editando.
 - **Download**: Baixe o conteúdo atual do editor como um arquivo Markdown ( `.md` ).
+- **Seletor de Idioma**: Altere as regras de análise entre Português, Inglês e Espanhol.
 
 ### Consulte as Estatísticas:
 - A barra inferior exibe o número de sentenças, palavras, caracteres e avisos no texto.
