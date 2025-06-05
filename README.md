@@ -19,11 +19,11 @@ Verbalize is an advanced Markdown editor with grammatical and stylistic analysis
 
 ### Overview
 
-![](https://raw.githubusercontent.com/mtgr18977/Verbalize/refs/heads/main/imgs/tela_1.png)
+![](https://raw.githubusercontent.com/mtgr18977/Verbalize/refs/heads/main/imgs/01.png)
 
 ### Highlighted Document View
 
-![](https://raw.githubusercontent.com/mtgr18977/Verbalize/refs/heads/main/imgs/tela_2.png)
+![](https://raw.githubusercontent.com/mtgr18977/Verbalize/refs/heads/main/imgs/02-en.png)
 
 ## Installation
 
@@ -141,11 +141,11 @@ Verbalize é um editor Markdown avançado com análise gramatical e estilística
 
 ### Visão geral
 
-![](https://raw.githubusercontent.com/mtgr18977/Verbalize/refs/heads/main/imgs/tela_1.png)
+![](https://raw.githubusercontent.com/mtgr18977/Verbalize/refs/heads/main/imgs/01.png)
 
 ### Visão com highlights de um documento
 
-![](https://raw.githubusercontent.com/mtgr18977/Verbalize/refs/heads/main/imgs/tela_2.png)
+![](https://raw.githubusercontent.com/mtgr18977/Verbalize/refs/heads/main/imgs/02-pt.png)
 
 ## Instalação
 
