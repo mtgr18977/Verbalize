@@ -44,6 +44,8 @@ Verbalize is an advanced Markdown editor with grammatical and stylistic analysis
 4. Create a `.env` file with `MARITACA_API_KEY=<your_key>`
 5. Start the Electron App: `npm start`
 6. Package the App (Optional): `npm run dist`
+4. Start the Electron App: `npm start`
+5. Package the App (Optional): `npm run dist`
    - Uses **electron-packager** to create binaries in the `dist/` folder.
 
 ## How to Use
@@ -166,6 +168,8 @@ Verbalize é um editor Markdown avançado com análise gramatical e estilística
 4. Crie um arquivo `.env` com `MARITACA_API_KEY=<sua_chave>`
 5. Inicie o Aplicativo Electron: `npm start`
 6. Empacotar o Aplicativo (Opcional): `npm run dist`
+4. Inicie o Aplicativo Electron: `npm start`
+5. Empacotar o Aplicativo (Opcional): `npm run dist`
    - Utiliza o **electron-packager** para gerar binários na pasta `dist/`.
 
 ## Como Usar
