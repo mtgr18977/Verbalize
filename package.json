@@ -4,10 +4,12 @@
   "description": "Verbalize - Editor Markdown com análise gramatical",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "dist": "electron-packager . verbalize --overwrite --out=dist"
   },
   "devDependencies": {
-    "electron": "^25.2.0"
+    "electron": "^25.2.0",
+    "electron-packager": "^17.1.1"
   },
   "author": "Paulo Duarte",
   "license": "MIT",

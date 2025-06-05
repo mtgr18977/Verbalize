@@ -43,8 +43,7 @@ Verbalize is an advanced Markdown editor with grammatical and stylistic analysis
 3. Install Dependencies: `npm install`
 4. Start the Electron App: `npm start`
 5. Package the App (Optional): `npm run dist`
-
-> Packages will be generated in the `dist/` folder.
+   - Uses **electron-packager** to create binaries in the `dist/` folder.
 
 ## How to Use
 
@@ -165,8 +164,7 @@ Verbalize é um editor Markdown avançado com análise gramatical e estilística
 3. Instale as Dependências: `npm install`
 4. Inicie o Aplicativo Electron: `npm start`
 5. Empacotar o Aplicativo (Opcional): `npm run dist`
-
-> Os pacotes serão gerados na pasta `dist/`.
+   - Utiliza o **electron-packager** para gerar binários na pasta `dist/`.
 
 ## Como Usar
 
