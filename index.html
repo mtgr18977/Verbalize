@@ -19,6 +19,7 @@
         <input type="file" id="rules-file-input" accept=".json">
         <button id="upload-button" class="btn btn-secondary btn-sm">Upload</button>
         <button id="upload-rules-button" class="btn btn-secondary btn-sm">Regras</button>
+        <button id="edit-rules-button" class="btn btn-secondary btn-sm">Editar regras</button>
         <button id="download-button" class="btn btn-secondary btn-sm">Download</button>
         <select id="language-selector" class="form-select form-select-sm" style="width:auto; display:inline-block; margin-left:8px;">
             <option value="pt-br">Português</option>
@@ -69,6 +70,25 @@
     </div>
     <div id="sugestao-texto-ia" class="mt-2"></div>
     <button id="download-report" class="btn btn-secondary btn-sm">Baixar relatório</button>
+</div>
+
+<!-- Modal de edição das regras -->
+<div class="modal fade" id="editRulesModal" tabindex="-1" aria-labelledby="editRulesLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editRulesLabel">Editar rules.json</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="rules-form" class="container-fluid"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary" id="save-rules-button">Salvar</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Incluindo as bibliotecas JavaScript -->

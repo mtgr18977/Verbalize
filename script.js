@@ -46,6 +46,18 @@ let lastRuleCounts = {};
 let lastReadabilityMetrics = [];
 let customRules = null;
 
+// Módulos do Node disponíveis apenas no ambiente Electron
+let fs = null;
+let path = null;
+if (typeof window.require === 'function') {
+    try {
+        fs = window.require('fs');
+        path = window.require('path');
+    } catch (e) {
+        console.warn('Módulos Node não disponíveis:', e);
+    }
+}
+
 // Obtenha a chave da API da Maritaca do processo principal
 // Verifique se estamos no ambiente Electron antes de tentar importar ipcRenderer
 
@@ -307,6 +319,106 @@ document.getElementById('rules-file-input').addEventListener('change', function 
         reader.readAsText(file);
     }
 });
+
+// ====== Editor das regras ======
+let loadedRulesJson = null;
+
+function populateRulesForm(json) {
+    const container = document.getElementById('rules-form');
+    container.innerHTML = '';
+    for (const lang in json) {
+        const langDiv = document.createElement('div');
+        langDiv.classList.add('mb-4');
+        const h4 = document.createElement('h4');
+        h4.textContent = lang;
+        langDiv.appendChild(h4);
+        const langRules = json[lang];
+        for (const ruleKey in langRules) {
+            const rule = langRules[ruleKey];
+            const fieldset = document.createElement('fieldset');
+            fieldset.classList.add('border', 'p-2', 'mb-3');
+            const legend = document.createElement('legend');
+            legend.classList.add('w-auto', 'px-2');
+            legend.textContent = ruleKey;
+            fieldset.appendChild(legend);
+            for (const prop in rule) {
+                const group = document.createElement('div');
+                group.classList.add('mb-2');
+                const label = document.createElement('label');
+                label.classList.add('form-label');
+                label.setAttribute('for', `${lang}-${ruleKey}-${prop}`);
+                label.textContent = prop;
+                let input;
+                if (prop === 'message' || prop === 'suggestion' || prop === 'condition') {
+                    input = document.createElement('textarea');
+                    input.rows = 2;
+                } else {
+                    input = document.createElement('input');
+                    input.type = 'text';
+                }
+                input.classList.add('form-control');
+                input.id = `${lang}-${ruleKey}-${prop}`;
+                input.value = rule[prop];
+                group.appendChild(label);
+                group.appendChild(input);
+                fieldset.appendChild(group);
+            }
+            langDiv.appendChild(fieldset);
+        }
+        container.appendChild(langDiv);
+    }
+}
+
+function openRulesEditor() {
+    fetch('rules.json')
+        .then(r => r.json())
+        .then(json => {
+            loadedRulesJson = json;
+            populateRulesForm(json);
+            const modal = new bootstrap.Modal(document.getElementById('editRulesModal'));
+            modal.show();
+        })
+        .catch(err => console.error('Erro ao carregar rules.json para edição:', err));
+}
+
+function saveRulesFromForm() {
+    if (!loadedRulesJson) return;
+    const result = {};
+    for (const lang in loadedRulesJson) {
+        result[lang] = {};
+        for (const ruleKey in loadedRulesJson[lang]) {
+            const rule = {};
+            for (const prop in loadedRulesJson[lang][ruleKey]) {
+                const element = document.getElementById(`${lang}-${ruleKey}-${prop}`);
+                if (element) {
+                    rule[prop] = element.value;
+                }
+            }
+            result[lang][ruleKey] = rule;
+        }
+    }
+
+    if (fs) {
+        try {
+            const filePath = path.join(__dirname, 'rules.json');
+            fs.writeFileSync(filePath, JSON.stringify(result, null, 2), 'utf8');
+            alert('Regras salvas com sucesso!');
+            customRules = result;
+            loadRules().then(updateView);
+        } catch (e) {
+            console.error('Erro ao salvar regras:', e);
+            alert('Erro ao salvar regras.');
+        }
+    } else {
+        alert('Salvar não disponível no modo web. Utilize a versão desktop.');
+    }
+    const modalEl = document.getElementById('editRulesModal');
+    const modal = bootstrap.Modal.getInstance(modalEl);
+    if (modal) modal.hide();
+}
+
+document.getElementById('edit-rules-button').addEventListener('click', openRulesEditor);
+document.getElementById('save-rules-button').addEventListener('click', saveRulesFromForm);
 
 document.getElementById('file-input').addEventListener('change', function (event) {
     var file = event.target.files[0];
