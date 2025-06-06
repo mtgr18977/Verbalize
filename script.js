@@ -44,6 +44,7 @@ let rules = {};
 let currentLanguage = 'pt-br';
 let lastRuleCounts = {};
 let lastReadabilityMetrics = [];
+let customRules = null;
 
 // Obtenha a chave da API da Maritaca do processo principal
 // Verifique se estamos no ambiente Electron antes de tentar importar ipcRenderer
@@ -53,11 +54,16 @@ let lastReadabilityMetrics = [];
 async function loadRules(lang = currentLanguage) {
     currentLanguage = lang;
     try {
-        const response = await fetch('rules.json');
-        if (!response.ok) {
-            throw new Error(`Erro ao carregar rules.json: ${response.statusText}`);
+        let jsonRules;
+        if (customRules) {
+            jsonRules = customRules;
+        } else {
+            const response = await fetch('rules.json');
+            if (!response.ok) {
+                throw new Error(`Erro ao carregar rules.json: ${response.statusText}`);
+            }
+            jsonRules = await response.json();
         }
-        const jsonRules = await response.json();
 
         const selected = jsonRules[lang] || {};
         rules = {};
@@ -279,6 +285,27 @@ editor.session.on('change', function (delta) {
 // Função para lidar com o upload de arquivo
 document.getElementById('upload-button').addEventListener('click', function () {
     document.getElementById('file-input').click();
+});
+
+// Upload de arquivo de regras personalizado
+document.getElementById('upload-rules-button').addEventListener('click', function () {
+    document.getElementById('rules-file-input').click();
+});
+
+document.getElementById('rules-file-input').addEventListener('change', function (event) {
+    var file = event.target.files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            try {
+                customRules = JSON.parse(e.target.result);
+                loadRules().then(updateView);
+            } catch (err) {
+                console.error('Erro ao processar arquivo de regras:', err);
+            }
+        };
+        reader.readAsText(file);
+    }
 });
 
 document.getElementById('file-input').addEventListener('change', function (event) {
