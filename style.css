@@ -331,6 +331,10 @@ body {
     display: none;
 }
 
+#rules-file-input {
+    display: none;
+}
+
 /* Popovers */
 .popover {
     font-size: 1em;

@@ -10,6 +10,7 @@ Verbalize is an advanced Markdown editor with grammatical and stylistic analysis
 - **Multilingual Support**: Rules available for Portuguese, English and Spanish.
 - **Syntax Highlighting**: Automatically highlights inserted code for better readability.
 - **Import and Export Files**: Import `.md`, `.markdown`, and `.txt` files, and export your work in Markdown format.
+- **Custom Rule Files**: Load a custom `rules.json` to tailor the analysis to your needs.
 - **Minimalist Interface**: A clean, writing-focused design with a responsive layout adaptable to different screen sizes.
 - **Desktop Application**: Available as a cross-platform desktop app using Electron.
 - **More Readability Metrics**: Extra formulas and progress bars to visualize Flesch scores.
