@@ -72,6 +72,80 @@
       "summary": " repetições de palavras.",
       "summarySingle": " repetição de palavra.",
       "suggestion": "Substitua a palavra repetida por um sinônimo ou reestruture a frase para evitar a repetição imediata."
+    },
+    "principio1_headings": {
+      "regex": "^#+\\s+.+$",
+      "message": "Considere adicionar cabeçalhos para organizar o conteúdo.",
+      "color": "#d9ead3",
+      "summary": " cabeçalhos detectados.",
+      "summarySingle": " cabeçalho detectado.",
+      "suggestion": "Use títulos claros e bem posicionados para guiar o leitor."
+    },
+    "principio2_paragrafosLongos": {
+      "regex": "([^\\n]+(?:\\n(?!\\n)[^\\n]+)*)",
+      "message": "Parágrafo muito longo detectado.",
+      "color": "#fce5cd",
+      "summary": " parágrafos longos detectados.",
+      "summarySingle": " parágrafo longo detectado.",
+      "suggestion": "Divida o parágrafo em partes menores. Mantenha uma ideia por parágrafo.",
+      "condition": "const sentenceCount = match.split('.') .length; return sentenceCount > 4;"
+    },
+    "principio3_vozPassivaSimplificada": {
+      "regex": "\\b(é|são|foi|foram|será|serão)\\s+\\w+(ado|ido|ada|ida|ados|idos|adas|idas)\\b",
+      "message": "Voz passiva detectada. Prefira a voz ativa.",
+      "color": "#fff2cc",
+      "summary": " casos de voz passiva simplificada.",
+      "summarySingle": " caso de voz passiva.",
+      "suggestion": "Use a estrutura sujeito + verbo + objeto. Ex: 'O sistema cria' em vez de 'É criado pelo sistema'."
+    },
+    "principio4_frasesLongas": {
+      "regex": "[^.!?]+[.!?]",
+      "message": "Frase longa detectada.",
+      "color": "#f4cccc",
+      "summary": " frases longas detectadas.",
+      "summarySingle": " frase longa detectada.",
+      "suggestion": "Divida frases com mais de 25 palavras para maior clareza.",
+      "condition": "const wc = match.trim().split(/\\s+/).length; return wc > 25;"
+    },
+    "principio5_termosComplexos": {
+      "regex": "\\b(implementar|utilizar|posteriormente|adicionalmente|configure|implement|utilize|subsequently|additionally)\\b",
+      "message": "Palavra complexa detectada.",
+      "color": "#ead1dc",
+      "summary": " palavras complexas detectadas.",
+      "summarySingle": " palavra complexa detectada.",
+      "suggestion": "Use termos simples como 'usar', 'configurar', 'depois'. Explique termos técnicos na primeira vez que forem usados."
+    },
+    "principio6_redundancias": {
+      "regex": "\\b(método de autenticação|authentication method|processo de|in order to|com o objetivo de)\\b",
+      "message": "Redundância detectada.",
+      "color": "#e6b8af",
+      "summary": " redundâncias encontradas.",
+      "summarySingle": " redundância encontrada.",
+      "suggestion": "Remova palavras desnecessárias. Ex: 'autenticação' em vez de 'método de autenticação'."
+    },
+    "principio7_sujeitoVerboSeparado": {
+      "regex": "\\w+,\\s+[^,]+,\\s+[^,]+,\\s+\\w+",
+      "message": "Grande separação entre sujeito e verbo.",
+      "color": "#cfe2f3",
+      "summary": " separações longas detectadas.",
+      "summarySingle": " separação longa detectada.",
+      "suggestion": "Evite separar sujeito e verbo com muitas informações intermediárias."
+    },
+    "principio8_elementosEstruturais": {
+      "regex": "^(#+\\s|[-*+]\\s|\\d+\\.\\s|\\|)",
+      "message": "Elemento estrutural detectado (título, lista ou tabela).",
+      "color": "#d0e0e3",
+      "summary": " elementos estruturais encontrados.",
+      "summarySingle": " elemento estrutural encontrado.",
+      "suggestion": "Use listas, títulos e tabelas para estruturar o conteúdo."
+    },
+    "principio9_errosConsistencia": {
+      "regex": "\\b(OAuth|oauth|Oauth|API|api|Api|JSON|json|Json)\\b",
+      "message": "Possível inconsistência na grafia de termos técnicos.",
+      "color": "#f9cb9c",
+      "summary": " variações inconsistentes detectadas.",
+      "summarySingle": " variação inconsistente detectada.",
+      "suggestion": "Padronize o uso de termos como API, JSON e OAuth ao longo do texto."
     }
   },
   "en": {

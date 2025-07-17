@@ -111,7 +111,45 @@ function updateView() {
         ruleReplacements[label] = 0;
     }
 
+    function wrapNodeContent(node, rule) {
+        var span = document.createElement('span');
+        span.setAttribute('style', `background: ${rule.color};`);
+        span.setAttribute('tabindex', '0');
+        span.setAttribute('data-bs-toggle', 'popover');
+        span.setAttribute('data-bs-trigger', 'focus');
+        span.setAttribute('data-bs-placement', 'top');
+        span.setAttribute('data-bs-html', 'true');
+        span.setAttribute('data-bs-content', `
+            <div><strong>${rule.message}</strong></div>
+            <div style="margin-top:6px;"><em>Sugestão:</em> ${rule.suggestion || ''}</div>
+        `);
+        span.innerHTML = node.innerHTML;
+        node.innerHTML = '';
+        node.appendChild(span);
+    }
+
    function traverseNodes(node) {
+    if (node.nodeType === Node.ELEMENT_NODE) {
+        if (rules['principio1_headings'] && /^H[1-6]$/.test(node.tagName)) {
+            wrapNodeContent(node, rules['principio1_headings']);
+            ruleReplacements['principio1_headings']++;
+            return;
+        }
+        if (rules['principio2_paragrafosLongos'] && node.tagName === 'P') {
+            var rule2 = rules['principio2_paragrafosLongos'];
+            var text = node.textContent;
+            if (!rule2.condition || rule2.condition(text)) {
+                wrapNodeContent(node, rule2);
+                ruleReplacements['principio2_paragrafosLongos']++;
+                return;
+            }
+        }
+        if (rules['principio8_elementosEstruturais'] && ['UL','OL','TABLE'].includes(node.tagName)) {
+            wrapNodeContent(node, rules['principio8_elementosEstruturais']);
+            ruleReplacements['principio8_elementosEstruturais']++;
+            return;
+        }
+    }
     if (node.nodeType === Node.TEXT_NODE) {
         var textContent = node.textContent;
         var parent = node.parentNode;
